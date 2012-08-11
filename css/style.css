@@ -11,9 +11,12 @@ body{
 	margin:0 auto;
 }
 #content{
-	width:960px;
+	align:center;
+	margin: 100px;
+	/*width:960px;
 	margin:5px;
 	float:left;
+	*/
 }
 /************************************************/
 .signup_wrap{
@@ -21,6 +24,16 @@ body{
 	width:100%;	
 	padding:5px;
 	background-color:#2A1FFF;
+}
+
+.login_form{
+	width:200px;
+	padding:20px;
+	margin:0 auto;
+	border:3px solid #DFDFDF;
+	background: -webkit- (linear, left top, left bottom, from(#fff), to(#cbd4e5));
+	background: -moz-linear-gradient(top,  #fff,  #cbd4e5);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#cbd4e5');
 }
 
 .reg_form{

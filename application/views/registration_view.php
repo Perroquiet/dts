@@ -1,6 +1,6 @@
 <div id="content">
 <div class="reg_form">
-<div class="form_title">Sign Up for Document Tracking </div><br>
+<div class="form_title">Sign Up</div><br>
 <?php echo validation_errors('<p class="error">'); ?>
 	<?php echo form_open("user/registration"); ?>
 		<p>

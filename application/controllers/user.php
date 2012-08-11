@@ -1,25 +1,27 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class User extends CI_Controller{
-	public function __construct()
-	{
+	function __construct() {
 		parent::__construct();
+		
 		$this->load->model('user_model');
+	
+		// View Modifications
+		$this->data['page_title'] = 'Registration';
+		$this->data['jquery_enabled'] = true;
+		$this->data['cs_scripts'] = array(base_url() . 'css/style.css');
 	}
 	public function index()
 	{
-			$data['title']= 'Home';
-			$this->load->view('header_view',$data);
-			$this->load->view("registration_view.php", $data);
-			$this->load->view('footer_view',$data);
+		$this->data['main_content'] = 'registration_view';
+		$this->load->view("includes/template.php", $this->data);
 	}
 
 	function thank()
 	{
-		$data['title']= 'Thank';
-		$this->load->view('header_view',$data);
-		$this->load->view('thank_view.php', $data);
-		$this->load->view('footer_view',$data);
+		$this->data['main_content'] = 'thank_view';
+		$this->load->view("includes/template.php", $this->data);
 	}
+	
 	public function registration()
 	{
 		$this->load->library('form_validation');
@@ -39,7 +41,8 @@ class User extends CI_Controller{
 		else
 		{
 			$this->user_model->add_user();
-			$this->thank();
+			//$this->thank();
+			redirect('/login/');
 		}
 	}
 	
