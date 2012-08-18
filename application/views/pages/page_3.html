@@ -1,0 +1,2 @@
+<img src="img/kitten.jpg" width="300" height="300" align="right">Donec in massa vel lectus aliquam laoreet nec et turpis. Nam viverra, purus in ultrices cursus, mi tortor porta nisl, a tincidunt arcu ante eu quam. Nulla in nibh sit amet orci ultrices vehicula in ac magna. Praesent faucibus odio at libero tempus faucibus.
+<div class="clear"></div>

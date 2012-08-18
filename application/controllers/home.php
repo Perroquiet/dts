@@ -6,6 +6,9 @@ class Home extends CI_Controller {
 		parent::__construct();
 		
 		$this->data['page_title'] = 'DTS - Home';
+		$this->data['jquery_enabled'] = true;
+		$this->data['js_scripts'] = array(base_url() . 'js/home_script.js');
+		$this->data['cs_scripts'] = array(base_url() . 'css/home_style.css');
 	}
 	
 	public function index() {

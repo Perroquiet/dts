@@ -1,0 +1,115 @@
+/*
+
+This is a Tutoralzine Demo 
+Original tutorial: A simple AJAX website with jQuery
+Tutorial URL: http://tutorialzine.com/2009/09/simple-ajax-website-jquery/
+
+You are free to use the following demo code for any purpose you see fit.
+
+*/
+
+
+/* Page styles */
+
+body,h1,h2,h3,p,td,quote,small,form,input,ul,li,ol,label{
+	margin:0px;
+	padding:0px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+	margin-top:20px;
+	color:#51555C;
+	font-size:13px;
+	background-color:#123456;
+	text-align:center;
+}
+
+.clear{
+	clear:both;
+}
+
+a, a:visited {
+	color:#007bc4;
+	text-decoration:none;
+	outline:none;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+#rounded{
+	width:800px;
+	margin:20px auto;
+	text-align:left;
+}
+
+.container{
+	background-color:#FFFFFF;
+	padding:10px 20px 20px 20px;
+}
+
+h1{
+	font-size:28px;
+	font-weight:bold;
+	font-family:"Trebuchet MS",Arial, Helvetica, sans-serif;
+}
+
+h2{
+	font-weight:normal;
+	font-size:20px;
+	
+	color:#999999;
+}
+
+ul{
+	margin:30px 0px;
+}
+
+li{
+	list-style:none;
+	display:block;
+	float:left;
+	width:80px;
+}
+
+li a,li a:visited{
+	padding:5px 10px;
+	text-align:center;
+	background-color:#000033;
+	color:white;
+	
+	-moz-border-radius:5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius:5px;
+
+	display:block;
+	margin-right:10px;
+}
+
+li a:hover{
+	background-color:#666666;
+	text-decoration:none;
+}
+
+#pageContent{
+	margin-top:20px;
+
+	border:1px dashed #cccccc;
+	padding:10px;
+		
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#loading{
+	visibility:hidden;
+}
+
+.demo{
+	color:white;
+}
