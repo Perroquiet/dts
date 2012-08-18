@@ -1,14 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class User extends CI_Controller{
+class Signup extends CI_Controller{
 	function __construct() {
 		parent::__construct();
 		
-		$this->load->model('user_model');
+		$this->load->model('registration_model');
 	
 		// View Modifications
 		$this->data['page_title'] = 'Registration';
 		$this->data['jquery_enabled'] = true;
 		$this->data['cs_scripts'] = array(base_url() . 'css/style.css');
+		$this->data['js_scripts'] = array(base_url() . 'js/signup_script.js');
 	}
 	public function index()
 	{
@@ -16,12 +17,6 @@ class User extends CI_Controller{
 		$this->load->view("includes/template.php", $this->data);
 	}
 
-	function thank()
-	{
-		$this->data['main_content'] = 'thank_view';
-		$this->load->view("includes/template.php", $this->data);
-	}
-	
 	public function registration()
 	{
 		$this->load->library('form_validation');
@@ -40,9 +35,8 @@ class User extends CI_Controller{
 		}
 		else
 		{
-			$this->user_model->add_user();
-			//$this->thank();
-			redirect('/login/');
+			$this->registration_model->add_user();
+			redirect('login');
 		}
 	}
 	
@@ -50,7 +44,7 @@ class User extends CI_Controller{
 public function check_user_ci()
 	{
 		$usr=$this->input->post('username');
-        $result=$this->user_model->check_user_exist($usr);
+        $result=$this->registration_model->check_user_exist($usr);
         if($result)
 		{
 			$this->form_validation->set_message('check_user', 'User Name already exit.');
@@ -66,7 +60,7 @@ public function check_user_ci()
 	public function check_user()
 	{
 		$usr=$this->input->post('username');
-        $result=$this->user_model->check_user_exist($usr);
+        $result=$this->registration_model->check_user_exist($usr);
         if($result)
         {
 			echo "false";

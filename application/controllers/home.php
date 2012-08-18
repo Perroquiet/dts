@@ -5,7 +5,7 @@ class Home extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		
-		$this->data['title'] = 'Home page';
+		$this->data['page_title'] = 'DTS - Home';
 	}
 	
 	public function index() {

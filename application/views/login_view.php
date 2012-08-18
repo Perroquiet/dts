@@ -9,7 +9,7 @@
 	echo form_label("Password: ");
 	echo form_password('password', '') . "</br>";
 	echo form_submit('submit', 'Login');
-	echo "</br>" . anchor('user', 'Sign up');
+	echo "</br>" . anchor('signup', 'Sign up');
 	
 	echo form_close();
 	?>

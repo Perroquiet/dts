@@ -6,7 +6,7 @@ class Login extends CI_Controller {
 		parent::__construct();
 		
 		$this->data['page_title'] = 'Login';
-		$this->data['cs_scripts'] = array(base_url() . 'css/style.css');
+		$this->data['cs_scripts'] = array(base_url() . 'css/login_style.css');
 	}
 	
 	
@@ -16,15 +16,15 @@ class Login extends CI_Controller {
 			redirect('home');
 		}
 		else {
-		$this->data['main_content']= 'login_form';
+		$this->data['main_content']= 'login_view';
 		$this->load->view('includes/template', $this->data);
 		}
 	}
 
 	function validate_credentials()
 	{
-		$this->load->model('membership_model');
-		$query = $this->membership_model->validate();
+		$this->load->model('login_model');
+		$query = $this->login_model->validate();
 		
 		if($query)
 		{
