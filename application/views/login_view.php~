@@ -2,7 +2,7 @@
 <html><body><center><img src=<?php echo '"' . base_url() . 'public/logo1.png"' ?> /></center></body></html>
 
 	<div class="login_form">
-
+	<div class="form_title">Login</div><br>
 	<?php
 	
 	echo form_open('login/validate_credentials');

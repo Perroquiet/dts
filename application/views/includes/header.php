@@ -92,7 +92,7 @@
 	if (isset($js_scripts)){ 
 		if (count($js_scripts)){
 			foreach($js_scripts as $js_script) {
-				echo "\t" . '<script type="text/javascript" src="' . $js_script . '"></script>' . "\r\n";
+				echo "\t" . '<script src="' . $js_script . '"></script>' . "\r\n";
 			}
 		}
 	}

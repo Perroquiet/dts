@@ -1,8 +1,8 @@
 <div id="content">
 <div class="reg_form">
-<div class="form_title">Sign Up</div><br>
+<div class="form_title" align="center">Sign Up</div><br>
 <?php echo validation_errors('<p class="error">'); ?>
-	<?php echo form_open("signup/registration"); ?>
+	<?php echo form_open("user/registration"); ?>
 		<p>
 			<label for="first_name">Firstname:</label>
 			<input type="text" id="first_name" name="first_name" value="<?php echo set_value('first_name'); ?>" /><span id="usr_verify" class="verify"></span>
@@ -47,8 +47,50 @@
 		</p>        
 		<p>
 			<input type="submit" class="greenButton" value="Submit" />
-			<?php echo anchor('login', 'Back'); ?>
 		</p>
 	<?php echo form_close(); ?>
 </div><!--<div class="reg_form">-->    
 </div><!--<div id="content">-->
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#password").keyup(function(){
+        
+        if($("#con_password").val().length >= 4)
+        {
+            if($("#con_password").val()!=$("#password").val())
+            {
+                $("#confrimpwd_verify").css({ "background-image": "url('<?php echo base_url();?>images/no.png')" }); 
+                $("#password_verify").css({ "background-image": "url('<?php echo base_url();?>images/no.png')" });
+                pwd=false;
+                register_show();
+            }
+            else{
+                $("#confrimpwd_verify").css({ "background-image": "url('<?php echo base_url();?>images/yes.png')" }); 
+                $("#password_verify").css({ "background-image": "url('<?php echo base_url();?>images/yes.png')" });
+            }
+        }
+    });
+    
+    $("#con_password").keyup(function(){
+        
+        if($("#password").val().length >=4)
+        {
+            if($("#con_password").val()!=$("#password").val())
+            {
+                $("#confrimpwd_verify").css({ "background-image": "url('<?php echo base_url();?>images/no.png')" }); 
+                $("#password_verify").css({ "background-image": "url('<?php echo base_url();?>images/no.png')" });
+                pwd=false;
+                register_show();
+            }
+            else{
+                $("#confrimpwd_verify").css({ "background-image": "url('<?php echo base_url();?>images/yes.png')" }); 
+                $("#password_verify").css({ "background-image": "url('<?php echo base_url();?>images/yes.png')" });
+
+            }
+        }
+    });
+});
+</script>
