@@ -3,8 +3,7 @@
 body{
 /*	background-color:#FFF; */
 	background-image:url('blue.jpg');
-	background-attachment: fixed;
-	background-repeat:repeat-y;
+	background-repeat: repeat;
 	font-family:Monaco,Consolas,'Lucida Grande','Lucida Console';
 	font-size:16px;
 	text-shadow:rgba(0,0,0,0.01) 0 0 0;
@@ -31,11 +30,10 @@ body{
 }
 
 .login_form{
-	background: white;
 	width:200px;
 	padding:20px;
 	margin:0 auto;
-/*	border:2px solid #DFDFDF; */
+	border:2px solid #DFDFDF;
 	background: -webkit- (linear, left top, left bottom, from(#fff), to(#cbd4e5));
 	background: -moz-linear-gradient(top,  #fff,  #cbd4e5);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#cbd4e5');
@@ -46,14 +44,15 @@ body{
 	width:460px;
 	padding:20px;
 	margin:0 auto;
-/*	border:3px dashed #DFDFDF; */
+	border:3px  #DFDFDF;
 	background: -webkit- (linear, left top, left bottom, from(#fff), to(#cbd4e5));
 	background: -moz-linear-gradient(top,  #fff,  #cbd4e5);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#cbd4e5');
 }
 .form_title,
 .form_sub_title{
-	font-size:20px;	
+	font-size:20px;
+	
 	font-family:"Lucida Grande",Tahoma,Verdana,Arial,sans-serif;
 	font-size:20px;
 	font-weight:bold;
@@ -63,7 +62,6 @@ body{
 	padding:6px 0 15px 0;
 }
 .reg_form p{
-	color: grey;
 	width: 300px;
 	clear: left;
 	margin: 0;
