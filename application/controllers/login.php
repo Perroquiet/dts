@@ -7,6 +7,7 @@ class Login extends CI_Controller {
 		
 		$this->data['page_title'] = 'Login';
 		$this->data['cs_scripts'] = array(base_url() . 'css/login_style.css');
+		$this->data['jquery_enabled'] = true;
 	}
 	
 	
