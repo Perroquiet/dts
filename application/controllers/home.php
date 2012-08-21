@@ -16,9 +16,10 @@ class Home extends CI_Controller {
 		
 		if ($this->session->userdata('is_logged_in')) {
 			$this->data['logged_in'] = true;
-			echo "Welcome! " . $this->session->userdata('username');
+/*			echo "Welcome! " . $this->session->userdata('username'); */
 			$this->data['main_content'] = 'home_view';
 			$this->load->view('includes/template.php', $this->data);
+
 		}
 		else {
 			redirect('login');

@@ -21,8 +21,8 @@ class Signup extends CI_Controller{
 	{
 		$this->load->library('form_validation');
 		// field name, error message, validation rules
-		$this->form_validation->set_rules('first_name', 'Firstname');
-		$this->form_validation->set_rules('last_name', 'Lastname');		
+		$this->form_validation->set_rules('first_name', 'Firstname', 'required');
+		$this->form_validation->set_rules('last_name', 'Lastname', 'required');		
 		$this->form_validation->set_rules('profession', 'Profession');
 		$this->form_validation->set_rules('location', 'Location');
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]|xss_clean|callback_check_user_ci');

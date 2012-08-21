@@ -6,7 +6,12 @@
 	<div id="main" class="container">
     <h1>Document Tracking System</h1>
     <h2>You Send, We Track.</h2>
-    
+
+	<center><?php echo "Welcome, " . $this->session->userdata('username') . "!";    
+	
+	?></center>
+
+
     <ul id="navigation">
     <li><a href="#page1">Home</a></li>
     <li><a href="#page2">Sent</a></li>
