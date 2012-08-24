@@ -1,0 +1,162 @@
+/*
+
+Tutoralzine Demo 
+Original tutorial: Making Our Own Twitter Timeline
+Tutorial URL: http://tutorialzine.com/2009/09/making-our-own-twitter-timeline/
+
+You are free to use the following demo code for any purpose you see fit.
+
+*/
+
+
+/* Page styles */
+
+body,h1,h2,h3,p,td,quote,small,form,input,ul,li,ol,label{
+	margin:0px;
+	padding:0px;
+}
+
+body{
+	margin-top:20px;
+	color:#51555C;
+}
+
+
+/* Form & timeline styles */
+
+#twitter-container{
+	-moz-border-radius:12px;
+	-khtml-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border-radius:12px;
+	
+	border:6px solid #f5f5f5;
+	
+	padding:10px;
+	width:600px;
+	
+	font-size:11px;
+	font-family:'Lucida Grande',sans-serif;
+	color:#333333;
+}
+
+label{
+	font-size:20px;
+	display:block;
+}
+
+.counter{
+	color:#CCCCCC;
+	float:right;
+	font-family:Georgia,serif;
+	font-size:32px;
+	font-weight:bold;
+	height:40px;
+	overflow:hidden;
+}
+
+textarea{
+	width:594px;
+	height:38px;
+	margin:5px 0 10px 0;
+	
+	border:1px solid #AAAAAA;
+	padding: 4px 2px;
+		
+	font-family:'Lucida Grande',sans-serif;
+	overflow:auto;
+	font-size:14px;
+}
+
+.clear{
+	clear:both;
+}
+
+.submitButton{
+	color:#666666;
+	font-size:14px;
+	height:32px;
+	width:115px;
+	
+	-moz-border-radius:6px;
+	-khtml-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius:6px;
+	
+	border:1px solid #cccccc;
+	background:url(img/button_bg.gif) repeat-x #f5f5f5;
+	
+	cursor:pointer;
+	float:right;
+}
+
+.submitButton:hover{
+	background-position:bottom;
+	border-color:#dddddd;
+	color:#333333;
+}
+
+.inact,.inact:hover{
+	background:#f5f5f5;
+	border:1px solid #eeeeee;
+	color:#aaaaaa;
+	cursor:auto;
+}
+
+.latest{
+	color: #666666;
+}
+
+ul.statuses{
+	margin:10px 0;
+}
+
+ul.statuses li {
+	position:relative;
+	border-bottom:1px dashed #D2DADA;
+	padding:15px 15px 15px 10px;
+	list-style:none;
+	font-size:14px;
+}
+
+ul.statuses li:first-child{
+	border-top:1px dashed #D2DADA;
+}
+
+ul.statuses li:hover {
+	background-color:#F7F7F7;
+}
+
+h3.timeline{
+	margin-top:20px;
+	color:#999999;
+	font-size:20px;
+	font-weight:normal;
+}
+
+div.tweetTxt{
+	float:left;
+	width:498px;
+	overflow:hidden;
+}
+
+ul.statuses a img.avatar{
+	float:left;
+	margin-right:10px;
+	border:1px solid #446600;
+}
+div.date{
+	line-height:18px;
+	font-size:12px;
+	color:#999999;
+}
+
+li a, li a:visited {
+	color:#007bc4;
+	text-decoration:none;
+	outline:none;
+}
+
+li a:hover{
+	text-decoration:underline;
+}

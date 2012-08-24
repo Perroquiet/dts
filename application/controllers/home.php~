@@ -29,7 +29,7 @@ class Home extends CI_Controller {
 			$this->data['location'] = $this->home_model->location;
 			//$this->home_model->get_tracking_ids();
 
-			//$this->data['feeds'] = array();
+			$this->data['feeds'] = array();
 
 
 

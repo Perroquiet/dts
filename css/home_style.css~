@@ -12,7 +12,7 @@ body{
 }
 /*Custom header*/
 #custom-header{
-	padding-top: 10px;
+	padding-top: 15px;
 	background-color:#eee;
 	height:25px;
 }
