@@ -4,7 +4,9 @@ class Home extends CI_Controller {
 	
 	function __construct() {
 		parent::__construct();
-		
+
+		$this->load->model('home_model');		
+
 		$this->data['page_title'] = 'DTS - Home';
 		$this->data['jquery_enabled'] = true;
 		$this->data['js_scripts'] = array(base_url() . 'js/home_script.js');
@@ -14,16 +16,40 @@ class Home extends CI_Controller {
 	public function index() {
 		
 		
-		if ($this->session->userdata('is_logged_in')) {
+		if (!$this->session->userdata('is_logged_in')) {
+			redirect('login');
+		}
+		else {
 			$this->data['logged_in'] = true;
+<<<<<<< HEAD
 /*			echo "Welcome! " . $this->session->userdata('username'); */
 			$this->data['main_content'] = 'home_view';
 			$this->load->view('includes/template.php', $this->data);
+=======
+			$this->data['username'] = $this->session->userdata('username');
+			$this->home_model->get_user_desc();
+			$this->data['first_name'] = $this->home_model->first_name;
+			$this->data['last_name'] = $this->home_model->last_name;
+			$this->data['profession'] = $this->home_model->profession;
+			$this->data['location'] = $this->home_model->location;
+			//$this->home_model->get_tracking_ids();
+
+			//$this->data['feeds'] = array();
+
+
+
+
+			$this->data['main_content'] = 'home_view';
+			$this->load->view('includes/template.php', $this->data);
+			
+>>>>>>> upstream/master
 
 		}
-		else {
-			redirect('login');
-		}
+		$this->load->view('send_view');
+		
+	}
+	
+	public function page() {
 		
 	}
 	

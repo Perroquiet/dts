@@ -74,7 +74,7 @@
 	if (isset($jquery_enabled)){ 
 		if ($jquery_enabled) {
 			//echo "\t" . '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>' . "\r\n";
-			echo "\t" . '<script type="text/javascript" src="' . base_url() . 'js/jquery.js"></script>' . "\r\n";
+			echo "\t" . '<script type="text/javascript" src="' . base_url() . 'js/jquery-1.8.0.js"></script>' . "\r\n";
 		}
 	}	
 	

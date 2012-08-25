@@ -1,16 +1,3 @@
-/*
-
-This is a Tutoralzine Demo 
-Original tutorial: A simple AJAX website with jQuery
-Tutorial URL: http://tutorialzine.com/2009/09/simple-ajax-website-jquery/
-
-You are free to use the following demo code for any purpose you see fit.
-
-*/
-
-
-/* Page styles */
-
 body,h1,h2,h3,p,td,quote,small,form,input,ul,li,ol,label{
 	margin:0px;
 	padding:0px;
@@ -18,12 +5,25 @@ body,h1,h2,h3,p,td,quote,small,form,input,ul,li,ol,label{
 }
 
 body{
+
 	background-image:url('blue.jpg');
 	margin-top:20px;
 	color:#51555C;
 	font-size:13px;
 /*	background-color:#123456; */
 	text-align:center;
+}
+/*Custom header*/
+#custom-header{
+	padding-top: 10px;
+	background-color:#eee;
+	height:25px;
+}
+
+/*Header*/
+#header{
+	margin:0 auto;
+	padding-bottom:15px !ie7;
 }
 
 .clear{
@@ -47,8 +47,12 @@ a:hover{
 }
 
 .container{
+	margin-top: 0px;
 	background-color:#FFFFFF;
 	padding:10px 20px 20px 20px;
+	text-align:left;
+	width:100%;
+	zoom:1;
 }
 
 h1{
