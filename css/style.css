@@ -35,7 +35,7 @@ body{
 	width:200px;
 	padding:20px;
 	margin:0 auto;
-/*	border:2px solid #DFDFDF; */
+	border:3px solid #DFDFDF; 
 	background: -webkit- (linear, left top, left bottom, from(#fff), to(#cbd4e5));
 	background: -moz-linear-gradient(top,  #fff,  #cbd4e5);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#cbd4e5');
@@ -46,7 +46,7 @@ body{
 	width:460px;
 	padding:20px;
 	margin:0 auto;
-/*	border:3px dashed #DFDFDF; */
+	border:3px solid #DFDFDF; 
 	background: -webkit- (linear, left top, left bottom, from(#fff), to(#cbd4e5));
 	background: -moz-linear-gradient(top,  #fff,  #cbd4e5);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#cbd4e5');
@@ -82,6 +82,7 @@ body{
 input{
 	padding:3px;
 	color:#333333;
+	background-color: white;
 	border:1px solid #96A6C5;
 	margin-top:2px;
 	width:180px;
@@ -94,7 +95,7 @@ input{
 	color:white;
 	background-color:#589d39;
 	outline:none;
-	border:1px solid #006600;
+	border:2px solid #006600;
 	font-weight:bold;
 }
 .greenButton:active{
