@@ -5,9 +5,12 @@ body,h1,h2,h3,p,td,quote,small,form,input,ul,li,ol,label{
 }
 
 body{
+
+	background-image:url('blue.jpg');
+	margin-top:20px;
 	color:#51555C;
 	font-size:13px;
-	background-color:#123456;
+/*	background-color:#123456; */
 	text-align:center;
 }
 /*Custom header*/

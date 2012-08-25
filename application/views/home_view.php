@@ -16,16 +16,39 @@
 <div id="home">
 </div>
 	<div id="cpanel">
+
 	</div>
 	<div id="rounded">
+
+
 	<div id="main" class="container">
+<<<<<<< HEAD
+	<h1>Document Tracking System</h1>
+	<h2>You Send, We Track.</h2>
+
+	<center><?php echo "Welcome, " . $this->session->userdata('username') . "!";    
+	
+	?></center>
+
+
+=======
     <h1>Document Tracking System</h1>
        
+>>>>>>> upstream/master
     <ul id="navigation">
+
     <li><a href="#page1">Home</a></li>
     <li><a href="#page2">Sent</a></li>
     <li><a href="#page3">Received</a></li>
+<<<<<<< HEAD
+    <li><?php
+                if (isset($logged_in)) {
+                echo anchor('home/logout', 'Logout');
+                }
+        ?></li>    
+=======
     <li><a href="#page4">Inbox</a></li>
+>>>>>>> upstream/master
     </ul>
     <div class="clear"></div>
     

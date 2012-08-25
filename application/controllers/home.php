@@ -21,6 +21,11 @@ class Home extends CI_Controller {
 		}
 		else {
 			$this->data['logged_in'] = true;
+<<<<<<< HEAD
+/*			echo "Welcome! " . $this->session->userdata('username'); */
+			$this->data['main_content'] = 'home_view';
+			$this->load->view('includes/template.php', $this->data);
+=======
 			$this->data['username'] = $this->session->userdata('username');
 			$this->home_model->get_user_desc();
 			$this->data['first_name'] = $this->home_model->first_name;
@@ -37,6 +42,7 @@ class Home extends CI_Controller {
 			$this->data['main_content'] = 'home_view';
 			$this->load->view('includes/template.php', $this->data);
 			
+>>>>>>> upstream/master
 
 		}
 		$this->load->view('send_view');

@@ -1,5 +1,5 @@
 body {
-	background: #b6b6b6;
+	background: white;
 	margin: 0;
 	padding: 0;
 	font-family: arial;
@@ -7,7 +7,7 @@ body {
 
 #login_form {
 	width: 300px;
-	background: #f0f0f0;
+	background: white;
 	border: 1px solid white;
 	margin: 250px auto 0;
 	padding: 1cm;
