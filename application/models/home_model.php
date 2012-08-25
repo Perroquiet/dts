@@ -2,7 +2,6 @@
 
 class Home_model extends CI_Model {
 
-public $user_id;
 public $first_name;
 public $last_name;
 public $profession;
@@ -18,20 +17,27 @@ public $location;
 		$this->db->select('id');		
 		$query = $this->db->get('tbluser');
 		foreach ($query->result() as $result) {
-			$this->user_id = $result->id;
+			return $result->id;
 		}
 	}
 
-	public function get_user_desc()
+	public function get_user_info($user_id)
 	{
-		$this->get_user_id();
-		$this->db->where('id', $this->user_id);
+		$this->db->where('id', $user_id);
 		$query = $this->db->get('tbluser');
 		foreach($query->result() as $result) {
-			$this->first_name = $result->first_name;
-			$this->last_name = $result->last_name;
-			$this->profession = $result->profession;
-			$this->location = $result->location;	
+			
+			return array(
+				$result->first_name,
+				$result->last_name,
+				$result->profession,
+				$result->location
+			);
+			
+			// $this->first_name = $result->first_name;
+			// $this->last_name = $result->last_name;
+			// $this->profession = $result->profession;
+			// $this->location = $result->location;	
 		}	
 	}
 /*

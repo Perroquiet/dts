@@ -54,16 +54,17 @@
     
     <div id="pageContent">
 		<?php
-	if(isset($first_name) && isset($last_name) && isset($profession) && isset($location))
-	echo "Name: " . $first_name . " " . $last_name;
-	echo "<br />Profession: " . $profession . " Location: " . $location;
-	/*
+		
+	if(isset($user_info))
+	echo "Name: " . $user_info[0] . " " . $user_info[1];
+	echo "<br />Profession: " . $user_info[2] . " Location: " . $user_info[3];
+	
 	if(isset($feeds))
 	foreach ($feeds as $feed)
 	{
 
 	}
-*/
+
 
    ?>
 	<hr/>
