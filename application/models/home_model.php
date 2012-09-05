@@ -31,21 +31,36 @@ class Home_model extends CI_Model {
 		}	
 	}
 
-	public function get_feed_descriptions_as_sender($user_id)
+	public function get_feed_descriptions($user_id)
 	{
-		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbluser WHERE tblsenders_receivers.sender = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbluser.id = tblsenders_receivers.receiver';
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbluser WHERE (tblsenders_receivers.sender = '.$user_id.' OR tblsenders_receivers.receiver = '.$user_id.') AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbluser.id = tblsenders_receivers.receiver';
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0)
 		{
 			return $query->result();
+		} else {
+			return null;
 		}
-	}
-	
-	public function get_feed_descriptions_as_receiver($user_id)
-	{
 		
 	}
 	
+	public function get_feed_descriptions_beta($user_id)
+	{
+		$relations = get_relations($user_id);
+		foreach ($relations as $row) {
+			if($row->receiver == $user_id) {
+				
+			}
+		}
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0)
+		{
+			return $query->result();
+		} else {
+			return null;
+		}
+		
+	}
 	
 	public function get_relations($user_id)
 	{
@@ -56,7 +71,67 @@ class Home_model extends CI_Model {
 			return $query->result();
 		}
 	}
-
+	
+	public function get_feed_descriptions_as_sender($user_id)
+	{
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbluser WHERE tblsenders_receivers.sender = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbluser.id = tblsenders_receivers.receiver';
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0)
+		{
+			return $query->result();
+		} else {
+			return null;
+		}
+		
+	}
+	
+	public function get_feed_descriptions_as_receiver($user_id)
+	{
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbluser WHERE tblsenders_receivers.receiver = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbluser.id = tblsenders_receivers.receiver';
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0)
+		{
+			return $query->result();
+		} else {
+			return null;
+		}
+	}
+	
+	public function get_descriptions_of_id($user_id)
+	{
+		$this->db->where('id', $user_id);
+		$query = $this->db->get('tbluser');
+		return $query->result();
+	}
+	
+	public function get_id_of_sender($tracking_id, $user_id)
+	{
+		$this->db->where('receiver', $user_id);
+		$this->db->where('tracking_id', $tracking_id);
+		$query = $this->db->get('tblsenders_receivers');
+		if($query->num_rows() > 0)
+		{
+			foreach ($query->result() as $row)
+			{
+				return $row->sender;
+			}
+		} else {
+			return null;
+		}
+	}
+	
+	public function get_list_of_receivers()
+	{
+		//$this->db->select('id', 'first_name', 'last_name', 'profession', 'location');
+		$query = $this->db->get('tbluser');
+		if($query->num_rows() > 0)
+		{
+			return $query->result();
+		} else {
+			return null;
+		}
+	}
+	
 	public function get_relations_as_sender($user_id)
 	{
 		$this->db->where('sender', $user_id);

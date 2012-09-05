@@ -6,13 +6,19 @@ body,h1,h2,h3,p,td,quote,small,form,input,ul,li,ol,label{
 
 body{
 
-	background-image:url('blue.jpg');
+	background: rgb(205,235,142);
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%, rgba(165,201,86,1) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(205,235,142,1)), color-stop(100%,rgba(165,201,86,1)));
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+	background: -o-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+	background: radial-gradient(ellipse at center,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=1 );
 	margin-top:20px;
-	color:#51555C;
 	font-size:13px;
-/*	background-color:#123456; */
 	text-align:center;
 }
+
 /*Custom header*/
 #custom-header{
 	padding-top: 10px;
@@ -77,13 +83,14 @@ li{
 	display:block;
 	float:left;
 	width:80px;
+	
 }
 
 li a,li a:visited{
 	padding:5px 10px;
 	text-align:center;
-	background-color:#000033;
-	color:white;
+	background-color:#1c140d;
+	color:#f2e9e1;
 	
 	-moz-border-radius:5px;
 	-khtml-border-radius: 5px;

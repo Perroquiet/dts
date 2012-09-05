@@ -8,11 +8,13 @@ private $user_id;
 		parent::__construct();
 
 		$this->load->model('home_model');		
-
+	
 		$this->data['page_title'] = 'DTS - Home';
 		$this->data['jquery_enabled'] = true;
 		$this->data['js_scripts'] = array(base_url() . 'js/home_script.js');
 		$this->data['cs_scripts'] = array(base_url() . 'css/home_style.css');
+	
+		$this->data['username'] = $this->session->userdata('username');
 	}
 	
 	public function index() {
@@ -25,16 +27,24 @@ private $user_id;
 			$this->data['logged_in'] = true;
 
 /*			echo "Welcome! " . $this->session->userdata('username'); */
-			$this->data['username'] = $this->session->userdata('username');
-			
+						
 			$user_id = $this->home_model->get_user_id();
 			
 			$this->data['user_info'] = $this->home_model->get_user_info($user_id);
 			//this->home_model->get_tracking_ids();
 			
 			//$this->data['feeds'] = $this->home_model->get_all_stream($user_id);
-			$this->data['feeds'] = $this->home_model->get_feed_descriptions_as_sender($user_id);
-
+			$this->data['user_id'] = $user_id;
+			
+			$feeds = $this->home_model->get_feed_descriptions($user_id);
+			foreach ($feeds as $feed) {
+				if ($feed->receiver == $user_id)
+				{
+					$this->data['if_receiver'] = $this->home_model->get_descriptions_of_id($feed->sender);
+				}
+			}
+			$this->data['feeds'] = $feeds;
+			
 
 
 
@@ -42,12 +52,32 @@ private $user_id;
 			$this->load->view('includes/template.php', $this->data);
 			
 		}
-		$this->load->view('send_view');
-		
 	}
 	
-	public function page() {
-		
+	public function sort_send() {
+			$this->data['logged_in'] = true;
+			
+			$user_id = $this->home_model->get_user_id();
+			$this->data['user_id'] = $user_id;
+			if ($this->home_model->get_feed_descriptions_as_sender($user_id)) {
+			$this->data['feeds'] = $this->home_model->get_feed_descriptions_as_sender($user_id);
+			}
+			
+			$this->data['main_content'] = 'home_view';
+			$this->load->view('includes/template.php', $this->data);
+	}
+	
+	public function sort_received() {
+			$this->data['logged_in'] = true;
+			
+			$user_id = $this->home_model->get_user_id();
+			$this->data['user_id'] = $user_id;
+			if ($this->home_model->get_feed_descriptions_as_receiver($user_id)) {
+			$this->data['feeds'] = $this->home_model->get_feed_descriptions_as_receiver($user_id);
+			}
+			
+			$this->data['main_content'] = 'home_view';
+			$this->load->view('includes/template.php', $this->data);
 	}
 	
 	public function logout() {

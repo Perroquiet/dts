@@ -11,8 +11,10 @@ body {
 	border: 1px solid white;
 	margin: 250px auto 0;
 	padding: 1cm;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
+	-moz-border-radius:5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius:5px;
 }
 
 h1,h2,h3,h4,h5 {

@@ -30,10 +30,11 @@
 	?></center>
 
     <ul id="navigation">
-    <li><a href="#page1">Home</a></li>
-    <li><a href="#page2">Sent</a></li>
-    <li><a href="#page3">Received</a></li>
+    <li><?php echo anchor('home', "Home"); ?></li>
+    <li><?php echo anchor('home/sort_send', "Sent"); ?></li>
+    <li><?php echo anchor('home/sort_received', "Received"); ?></li>
     <li><a href="#page4">Inbox</a></li>
+	<li><?php echo anchor("send", "Send"); ?></li>
     </ul>
 
     <div class="clear"></div>
@@ -48,8 +49,23 @@
 	if(isset($feeds))
 	foreach ($feeds as $feed)
 	{
-		echo '<div>Subject: <b>'.$feed->name . '</b> <i>To: '.$feed->first_name . ' '.$feed->last_name . '<br /></i>';
+		
+		echo '<div>Subject: <b>'.$feed->name . '</b> <i>';
+		if($user_id == $feed->sender) {
+			echo "To: ";
+		} else { 
+			echo "From: ";
+		}
+		if(isset($is_receiver)) {
+			foreach ($is_receiver as $sender)
+			{
+				echo $sender->first_name . ' ' . $sender->last_name . '<br /></i>';
+			}
+		} else {
+			echo $feed->first_name . ' '.$feed->last_name . '<br /></i>';
+		}
 		echo 'Location: '.$feed->location .' Date: '.$feed->date_time . "<hr/></div>";
+		
 		
 	}
 
