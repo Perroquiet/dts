@@ -22,13 +22,6 @@
 
 
 	<div id="main" class="container">
-	<h1>Document Tracking System</h1>
-	<h2>You Send, We Track.</h2>
-
-	<center><?php echo "Welcome, " . $this->session->userdata('username') . "!";    
-	
-	?></center>
-
     <ul id="navigation">
     <li><?php echo anchor('home', "Home"); ?></li>
     <li><?php echo anchor('home/sort_send', "Sent"); ?></li>
