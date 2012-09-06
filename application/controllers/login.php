@@ -44,6 +44,7 @@ class Login extends CI_Controller {
 		{
 			//echo "diri nisulod sa else";
 			$this->index();
+		
 		}
 	
 

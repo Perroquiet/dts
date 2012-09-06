@@ -27,6 +27,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', end
 	float:left;
 	*/
 }
+
+#rounded{
+
+	width:400px;
+	margin: auto;
+	text-align:left;
+
+}
+
+
 /************************************************/
 .signup_wrap{
 	height:25px;
@@ -38,13 +48,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', end
 
 .login_form{
 	background: white;
-	width:200px;
+	width:300px;
 	padding:20px;
 	margin:0 auto;
+	
 	border:3px solid #DFDFDF; 
 	background: -webkit- (linear, left top, left bottom, from(#fff), to(#cbd4e5));
 	background: -moz-linear-gradient(top,  #fff,  #cbd4e5);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#cbd4e5');
+
+	-moz-border-radius:5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius:5px;
+
 }
 
 .reg_form{
@@ -90,14 +107,16 @@ input{
 	color:#333333;
 	background-color: white;
 	border:1px solid #96A6C5;
-	margin-top:2px;
+	margin-top:5px;
 	width:180px;
 	font-size:11px;
+	
 }
+
 
 .button{
 	width:auto;
-        margin:10px 0 0 150px;
+        margin:10px 0 0 200px;
         padding:3px 4px 3px 4px;
         color:white;
         background-color: #34696f;
