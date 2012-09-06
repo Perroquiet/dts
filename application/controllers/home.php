@@ -36,11 +36,13 @@ private $user_id;
 			//$this->data['feeds'] = $this->home_model->get_all_stream($user_id);
 			$this->data['user_id'] = $user_id;
 			
-			$feeds = $this->home_model->get_feed_descriptions($user_id);
-			foreach ($feeds as $feed) {
-				if ($feed->receiver == $user_id)
-				{
-					$this->data['if_receiver'] = $this->home_model->get_descriptions_of_id($feed->sender);
+			$feeds = $this->home_model->get_feed_descriptions_beta($user_id);
+			if (isset($feeds)) {
+				foreach ($feeds as $feed) {
+					if ($feed->receiver == $user_id)
+					{
+						$this->data['if_receiver'] = $this->home_model->get_descriptions_of_id($feed->sender);
+					}
 				}
 			}
 			$this->data['feeds'] = $feeds;

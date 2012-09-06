@@ -47,6 +47,7 @@
 		</p>        
 		<p>
 			<input type="submit" class="greenButton" value="Submit" />
+			<?php echo anchor('login', 'Back'); ?>
 		</p>
 	<?php echo form_close(); ?>
 </div><!--<div class="reg_form">-->    

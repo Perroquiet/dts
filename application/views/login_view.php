@@ -18,7 +18,6 @@
 	<?php
 	//echo "</br>" . anchor('signup', 'Sign up');
 	echo "</br></br> Don't have an account? " . anchor('signup', 'Create Now!');	
-	
 	echo form_close();
 	?>
 	</div>

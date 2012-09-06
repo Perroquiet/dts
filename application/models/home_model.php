@@ -18,8 +18,8 @@ class Home_model extends CI_Model {
 
 	public function get_user_info($user_id)
 	{
-		$this->db->where('id', $user_id);
-		$query = $this->db->get('tbluser');
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get('tbldescription');
 		foreach($query->result() as $result) {
 			
 			return array(
@@ -46,20 +46,39 @@ class Home_model extends CI_Model {
 	
 	public function get_feed_descriptions_beta($user_id)
 	{
-		$relations = get_relations($user_id);
-		foreach ($relations as $row) {
-			if($row->receiver == $user_id) {
-				
+		// $senders = array();
+		// $relations = get_relations($user_id);
+		// foreach ($relations as $row) {
+			// if($row->receiver == $user_id) {
+				// array_push($senders, $row->sender);
+			// }
+		// }
+		// $query = $this->db->query($sql);
+		// if($query->num_rows() > 0)
+		// {
+			// return $query->result();
+		// } else {
+			// return null;
+		// }
+		
+		$stream = array();
+		$feed_senders = $this->get_feed_descriptions_as_sender($user_id);
+		$feed_receivers = $this->get_feed_descriptions_as_receiver($user_id);
+		if($feed_senders == null) {
+			return null;
+		} else {
+			foreach ($feed_senders as $row) {
+				array_push($stream, $row);
 			}
 		}
-		$query = $this->db->query($sql);
-		if($query->num_rows() > 0)
-		{
-			return $query->result();
-		} else {
+		if($feed_receivers == null) { 
 			return null;
+		} else {
+			foreach ($feed_receivers as $row) {
+				array_push($stream, $row);
+			}
 		}
-		
+		return $stream;
 	}
 	
 	public function get_relations($user_id)
@@ -87,7 +106,7 @@ class Home_model extends CI_Model {
 	
 	public function get_feed_descriptions_as_receiver($user_id)
 	{
-		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbluser WHERE tblsenders_receivers.receiver = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbluser.id = tblsenders_receivers.receiver';
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbluser WHERE tblsenders_receivers.receiver = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbluser.id = tblsenders_receivers.sender';
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0)
 		{
@@ -99,7 +118,7 @@ class Home_model extends CI_Model {
 	
 	public function get_descriptions_of_id($user_id)
 	{
-		$this->db->where('id', $user_id);
+		$this->db->where('user_id', $user_id);
 		$query = $this->db->get('tbluser');
 		return $query->result();
 	}

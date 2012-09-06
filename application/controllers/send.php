@@ -9,6 +9,8 @@ class Send extends CI_Controller {
 		$this->data['page_title'] = 'Send Document';
 		$this->data['cs_scripts'] = array(base_url() . 'css/home_style.css');
 		
+		$this->load->model('send_model');
+		$this->load->model('home_model');
 	}
 	
 	function index() {
@@ -17,13 +19,17 @@ class Send extends CI_Controller {
 			redirect('login');
 		}
 		else {
-			$this->load->model('home_model');
 			$this->data['login'] = true;
-			$this->data['receivers'] = $this->home_model->get_list_of_receivers();
+			$this->data['receivers'] = $this->send_model->get_id_and_names($this->home_model->get_user_id());
+			
 			$this->data['main_content'] = 'send_view.php';
 			$this->load->view('includes/template.php', $this->data);
 		}
 	}
 
+	function submit() {
+		//echo $this->input->post('receiverName');
+		
+	}
 }
 ?>

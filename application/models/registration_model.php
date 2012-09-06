@@ -8,16 +8,31 @@ class Registration_model extends CI_Model {
     }
 	public function add_user()
 	{
-		$data=array(
+		$user=array(
+			'username'=>$this->input->post('username'),
+			'password'=>md5($this->input->post('password'))
+			);
+		$this->db->insert('tbluser',$user);
+		
+		$descriptions = array(
+			'user_id' => $this->get_id($this->input->post('username')),
 			'first_name'=>$this->input->post('first_name'),
 			'last_name'=>$this->input->post('last_name'),
 			'profession'=>$this->input->post('profession'),
 			'location'=>$this->input->post('location'),
-			'username'=>$this->input->post('username'),
-			'password'=>md5($this->input->post('password'))
-			);
-		$this->db->insert('tbluser',$data);
+		);
+		$this->db->insert('tbldescription', $descriptions);
 	}
+	
+	public function get_id($username) {
+		$this->db->where('username', $username);
+		$query = $this->db->get('tbluser');
+		foreach ($query->result() as $row) 
+		{
+			return $row->id;
+		}
+	}
+	
 	public function check_user_exist($usr)
     {
 		
