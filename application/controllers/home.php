@@ -13,8 +13,7 @@ private $user_id;
 		$this->data['jquery_enabled'] = true;
 		$this->data['js_scripts'] = array(base_url() . 'js/home_script.js');
 		$this->data['cs_scripts'] = array(base_url() . 'css/home_style.css');
-	
-		$this->data['username'] = $this->session->userdata('username');
+		$this->data['username'] = $this->home_model->get_user_info($this->home_model->get_user_id());
 	}
 	
 	public function index() {
@@ -25,15 +24,7 @@ private $user_id;
 		}
 		else {
 			$this->data['logged_in'] = true;
-
-/*			echo "Welcome! " . $this->session->userdata('username'); */
-						
 			$user_id = $this->home_model->get_user_id();
-			
-			$this->data['user_info'] = $this->home_model->get_user_info($user_id);
-			//this->home_model->get_tracking_ids();
-			
-			//$this->data['feeds'] = $this->home_model->get_all_stream($user_id);
 			$this->data['user_id'] = $user_id;
 			
 			$feeds = $this->home_model->get_feed_descriptions_beta($user_id);
@@ -45,11 +36,8 @@ private $user_id;
 					}
 				}
 			}
-			$this->data['feeds'] = $feeds;
 			
-
-
-
+			$this->data['feeds'] = $feeds;
 			$this->data['main_content'] = 'home_view';
 			$this->load->view('includes/template.php', $this->data);
 			
@@ -80,6 +68,58 @@ private $user_id;
 			
 			$this->data['main_content'] = 'home_view';
 			$this->load->view('includes/template.php', $this->data);
+	}
+	
+	public function not_verified() {
+			$this->data['logged_in'] = true;
+			$user_id = $this->home_model->get_user_id();
+			$this->data['user_id'] = $user_id;
+			
+			if ($this->home_model->get_non_verified_feeds($user_id)) {
+				$this->data['feeds'] = $this->home_model->get_non_verified_feeds($user_id);
+			}
+			$this->data['main_content'] = 'home_view';
+			$this->load->view('includes/template.php', $this->data);
+	}
+	
+	public function viewitem($tracking_id) {
+			$this->data['logged_in'] = true;
+			$user_id = $this->home_model->get_user_id();
+			$this->data['user_id'] = $user_id;
+			
+			if ($this->home_model->get_document_info($tracking_id)) {
+				$this->data['documentView'] = $this->home_model->get_document_info($tracking_id);
+			}
+			
+			$freeze = $this->home_model->get_document_info($tracking_id);
+			foreach ($freeze as $row) {
+		
+				if ($row->sender == $this->home_model->get_user_id()) {
+					if ($this->home_model->get_sender_description($tracking_id, $row->receiver))
+					{
+						$this->data['relations'] = $this->home_model->get_sender_description($tracking_id, $row->receiver);
+					}
+				}
+			
+				else if ($row->receiver = $this->home_model->get_user_id()) {
+					if ($this->home_model->get_receiver_description($tracking_id, $row->sender))
+					{
+						$this->data['relations'] = $this->home_model->get_receiver_description($tracking_id, $row->sender);
+					}
+				}
+			}
+			$this->data['main_content'] = 'home_view';
+			$this->load->view('includes/template.php', $this->data);
+	}
+	
+	public function verifydoc($tracking_id) {
+			$this->data['logged_in'] = true;
+			$user_id = $this->home_model->get_user_id();
+			$this->data['user_id'] = $user_id;
+			
+			$this->home_model->update_verification($tracking_id);
+			redirect('home/not_verified');
+			
 	}
 	
 	public function logout() {

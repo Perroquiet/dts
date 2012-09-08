@@ -3,11 +3,13 @@
 
 <?php
 	if(isset($username)) {
-		echo $username . " ";
+		foreach ($username as $row) {
+			echo $row->first_name . " " . $row->last_name;
+		}
 	}	
 
 	if (isset($logged_in)) {
-		echo "(" . anchor('home/logout', 'Logout') . ")";
+		echo " (" . anchor('home/logout', 'Logout') . ")";
 	}
 	
 
@@ -22,11 +24,18 @@
 
 
 	<div id="main" class="container">
+<<<<<<< HEAD
     <ul id="navigation">
+=======
+	<h1>Document Tracking System</h1>
+	<h2>You Send, We Track.</h2>
+
+	<ul id="navigation">
+>>>>>>> Edited Verification module
     <li><?php echo anchor('home', "Home"); ?></li>
     <li><?php echo anchor('home/sort_send', "Sent"); ?></li>
     <li><?php echo anchor('home/sort_received', "Received"); ?></li>
-    <li><a href="#page4">Inbox</a></li>
+    <li><?php echo anchor('home/not_verified', "Inbox"); ?></li>
 	<li><?php echo anchor("send", "Send"); ?></li>
     </ul>
 
@@ -42,8 +51,16 @@
 	if(isset($feeds))
 	foreach ($feeds as $feed)
 	{
+		//print_r($feeds);
+		echo '<table><tr><td width=1000px><div>Subject: <b>'.anchor('home/viewitem/'.$feed->tracking_id, $feed->name) . '</b> <i>';
+		echo ' Verified: ';
 		
-		echo '<div>Subject: <b>'.$feed->name . '</b> <i>';
+		if ($feed->verified == 0) {
+			echo "No";
+		} else {
+			echo "Yes";
+		}
+		echo "<br/>";
 		if($user_id == $feed->sender) {
 			echo "To: ";
 		} else { 
@@ -57,9 +74,51 @@
 		} else {
 			echo $feed->first_name . ' '.$feed->last_name . '<br /></i>';
 		}
-		echo 'Location: '.$feed->location .' Date: '.$feed->date_time . "<hr/></div>";
 		
+		echo 'Date: '.$feed->date_time . "</td>";
 		
+		echo "<td></div><div float=right>";
+		echo "<ul id=\"navigation\">";
+		echo "<li>".anchor('home/viewitem/'.$feed->tracking_id,'View')."</li>";
+		echo "</ul>";
+		echo "</td></div></tr></table><hr/>";
+		
+	}
+	
+	if (isset($documentView)) {
+		if (isset($relations)) {
+			echo "<table>";
+			foreach ($documentView as $row) {
+				echo "<tr><td width=300px>";
+				echo "Tracking ID: " . $row->tracking_id . "<br/>";
+				echo "Subject: " . $row->name . "<br/>";
+				echo "Description: " . $row->name . "<br/>";
+				echo "Verified: ";
+				if ($row->verified == 0) {
+					echo "No";
+				} else {
+					echo "Yes";
+				}
+				echo "</td>";
+			}
+			foreach ($relations as $row) {
+					echo "<td width=500px>";
+					if($user_id == $row->sender) {
+						echo "To: ";
+					} else { 
+						echo "From: ";
+					}
+					echo $row->first_name . ' ' . $row->last_name . '<br/>';
+					echo "Location: " . $row->location . "</td>";
+					
+					if($user_id == $row->receiver) {
+						echo "<td>";
+						echo "<ul id=\"navigation\">";
+						echo "<li>". anchor('home/verifydoc/'.$row->tracking_id, 'Verify') . "</li>";
+					}
+				}
+				echo "</table>";
+		}
 	}
 
 

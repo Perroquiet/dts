@@ -28,7 +28,15 @@ class Send extends CI_Controller {
 	}
 
 	function submit() {
-		//echo $this->input->post('receiverName');
+		if (!$this->session->userdata('is_logged_in')) {
+			redirect('login');
+		} else
+		{
+			$this->send_model->insert_description();
+			redirect('home');
+		}
+		
+		
 		
 	}
 }
