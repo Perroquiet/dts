@@ -24,14 +24,14 @@
 
 
 	<div id="main" class="container">
-<<<<<<< HEAD
+
     <ul id="navigation">
-=======
+
 	<h1>Document Tracking System</h1>
 	<h2>You Send, We Track.</h2>
 
 	<ul id="navigation">
->>>>>>> Edited Verification module
+
     <li><?php echo anchor('home', "Home"); ?></li>
     <li><?php echo anchor('home/sort_send', "Sent"); ?></li>
     <li><?php echo anchor('home/sort_received', "Received"); ?></li>
