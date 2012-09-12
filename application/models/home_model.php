@@ -244,15 +244,15 @@ class Home_model extends CI_Model {
 		if($query->num_rows() >0 )
 		{
 		
-		// for ($i = 0; $i<=$query->num_rows(); $i++)
-		// {
-				// $row->tracking_id,
-				// $row->name,
-				// $row->description,
-				// $row->date_time,
-				// $row->sender,
-				// $row->receiver
-		// }
+		for ($i = 0; $i<=$query->num_rows(); $i++)
+		{
+				$row->tracking_id,
+				$row->name,
+				$row->description,
+				$row->date_time,
+				$row->sender,
+				$row->receiver
+		}
 		
 			return $query->result();
 		}
@@ -262,5 +262,5 @@ class Home_model extends CI_Model {
 	}
 	
 }
-
+//09071981954
 ?>
