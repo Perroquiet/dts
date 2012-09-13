@@ -53,7 +53,7 @@
 	{
 		//print_r($feeds);
 		echo '<table><tr><td width=1000px><div>Subject: <b>'.anchor('home/viewitem/'.$feed->tracking_id, $feed->name) . '</b> <i>';
-		echo ' Verified: ';
+		echo ' Received: ';
 		
 		if ($feed->verified == 0) {
 			echo "No";
@@ -75,8 +75,10 @@
 			echo $feed->first_name . ' '.$feed->last_name . '<br /></i>';
 		}
 		
-		echo 'Date: '.$feed->date_time . "</td>";
-		
+		echo 'Date Sent: '.$feed->date_time_sent . "</br>";
+		if ($feed->date_time_received != NULL) {
+			echo 'Date Received: '. $feed->date_time_received . "</td>";
+		} 		
 		echo "<td></div><div float=right>";
 		echo "<ul id=\"navigation\">";
 		echo "<li>".anchor('home/viewitem/'.$feed->tracking_id,'View')."</li>";
@@ -90,19 +92,23 @@
 			echo "<table>";
 			foreach ($documentView as $row) {
 				echo "<tr><td width=300px>";
-				echo "Tracking ID: " . $row->tracking_id . "<br/>";
-				echo "Subject: " . $row->name . "<br/>";
-				echo "Description: " . $row->name . "<br/>";
-				echo "Verified: ";
+				echo "<strong>Tracking ID: </strong>" . $row->tracking_id . "<br/>";
+				echo "<strong>Subject: </strong>" . $row->name . "<br/>";
+				echo "<strong>Description: </strong>" . $row->description . "<br/>";
+				echo "<strong>Date Sent: </strong>" . $row->date_time_sent . "<br/>";
+				echo "<strong>Received: </strong>";
 				if ($row->verified == 0) {
-					echo "No";
+					echo "No <br/>";
 				} else {
-					echo "Yes";
+					echo "Yes <br/>";
+				}
+				if ($row->date_time_received != NULL) {
+					echo "<strong>Date Received: </strong>".$row->date_time_received;
 				}
 				echo "</td>";
 			}
 			foreach ($relations as $row) {
-					echo "<td width=500px>";
+					echo "<td width=400px>";
 					if($user_id == $row->sender) {
 						echo "To: ";
 					} else { 
@@ -112,9 +118,12 @@
 					echo "Location: " . $row->location . "</td>";
 					
 					if($user_id == $row->receiver) {
+						foreach ($documentView as $verified)
+						if ($verified->verified == 0) {
 						echo "<td>";
 						echo "<ul id=\"navigation\">";
-						echo "<li>". anchor('home/verifydoc/'.$row->tracking_id, 'Verify') . "</li>";
+						echo "<li>". anchor('home/verifydoc/'.$row->tracking_id, 'Received') . "</li>";
+						}
 					}
 				}
 				echo "</table>";

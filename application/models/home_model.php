@@ -84,7 +84,7 @@ class Home_model extends CI_Model {
 	
 	public function get_feed_descriptions_as_receiver($user_id)
 	{
-		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE tblsenders_receivers.receiver = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbldescription.user_id = tblsenders_receivers.sender';
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE tblsenders_receivers.receiver = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbldescription.user_id = tblsenders_receivers.sender AND tbldocument.verified = 1';
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0)
 		{
@@ -202,8 +202,9 @@ class Home_model extends CI_Model {
 	
 	public function update_verification($tracking_id) {
 		$data = array(
-			'verified' => 1
-		);
+			'verified' => 1,
+			'date_time_received' => date('Y-m-d H:i:s', time())
+			);
 		$this->db->where('tracking_id', $tracking_id);
 		$this->db->update('tbldocument', $data);
 	}
@@ -217,7 +218,7 @@ class Home_model extends CI_Model {
 				$row->tracking_id,
 				$row->name,
 				$row->description,
-				$row->date_time,
+				$row->date_time_sent,
 				$row->sender,
 				$row->receiver
 			);
@@ -231,7 +232,7 @@ class Home_model extends CI_Model {
 				$row->tracking_id,
 				$row->name,
 				$row->description,
-				$row->date_time,
+				$row->date_time_sent,
 				$row->sender,
 				$row->receiver
 			);
@@ -246,12 +247,12 @@ class Home_model extends CI_Model {
 		
 		for ($i = 0; $i<=$query->num_rows(); $i++)
 		{
-				$row->tracking_id,
-				$row->name,
-				$row->description,
-				$row->date_time,
-				$row->sender,
-				$row->receiver
+				// $row->tracking_id,
+				// $row->name,
+				// $row->description,
+				// $row->date_time,
+				// $row->sender,
+				// $row->receiver
 		}
 		
 			return $query->result();

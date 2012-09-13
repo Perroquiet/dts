@@ -13,7 +13,7 @@ class Send_model extends CI_Model {
 			'name' => $this->input->post('documentName'),
 			'description' => $this->input->post('documentDescription'),
 			'verified' => 0,
-			'date_time' => date('Y-m-d H:i:s', time())
+			'date_time_sent' => date('Y-m-d H:i:s', time())
 		);
 		
 		$this->db->insert('tbldocument', $data);
