@@ -47,32 +47,46 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', end
 }
 
 .login_form{
-	background: white;
+	background: rgb(249,252,247);
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(249,252,247,1) 60%, rgba(245,249,240,1) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(60%,rgba(249,252,247,1)), color-stop(100%,rgba(245,249,240,1)));
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(249,252,247,1) 60%,rgba(245,249,240,1) 100%);
+	background: -o-radial-gradient(center, ellipse cover,  rgba(249,252,247,1) 60%,rgba(245,249,240,1) 100%);
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(249,252,247,1) 60%,rgba(245,249,240,1) 100%);
+	background: radial-gradient(ellipse at center,  rgba(249,252,247,1) 60%,rgba(245,249,240,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9fcf7', endColorstr='#f5f9f0',GradientType=1 );
 	width:300px;
 	padding:20px;
 	margin:0 auto;
-	
-	border:3px solid #DFDFDF; 
+	border:2px solid #1C140D; 
 	background: -webkit- (linear, left top, left bottom, from(#fff), to(#cbd4e5));
 	background: -moz-linear-gradient(top,  #fff,  #cbd4e5);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#cbd4e5');
-
 	-moz-border-radius:5px;
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	border-radius:5px;
+	
 
 }
 
 .reg_form{
-	background: white;
+	background: rgb(249,252,247);
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(249,252,247,1) 60%, rgba(245,249,240,1) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(60%,rgba(249,252,247,1)), color-stop(100%,rgba(245,249,240,1)));
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(249,252,247,1) 60%,rgba(245,249,240,1) 100%);
+	background: -o-radial-gradient(center, ellipse cover,  rgba(249,252,247,1) 60%,rgba(245,249,240,1) 100%);
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(249,252,247,1) 60%,rgba(245,249,240,1) 100%);
+	background: radial-gradient(ellipse at center,  rgba(249,252,247,1) 60%,rgba(245,249,240,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9fcf7', endColorstr='#f5f9f0',GradientType=1 );
 	width:460px;
 	padding:20px;
 	margin:0 auto;
-	border:3px solid #DFDFDF; 
-	background: -webkit- (linear, left top, left bottom, from(#fff), to(#cbd4e5));
-	background: -moz-linear-gradient(top,  #fff,  #cbd4e5);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#cbd4e5');
+	border:3px solid #1C140D; 
+	-moz-border-radius:5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	
+	
 }
 .form_title,
 .form_sub_title{
@@ -85,6 +99,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', end
 	font-weight:normal;
 	padding:6px 0 15px 0;
 }
+
 .reg_form p{
 	color: grey;
 	width: 300px;
@@ -93,15 +108,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', end
 	padding: 5px 0 8px 0;
 	padding-left: 155px; /*width of left column containing the label elements*/
 	border-top: 1px dashed gray;
-	background: white;
 	height: 1%;
 }
+
 .reg_form label{
 	font-weight: bold;
 	float: left;
 	margin-left: -155px; /*width of left column*/
 	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
 }
+
 input{
 	padding:3px;
 	color:#333333;
@@ -116,15 +132,16 @@ input{
 
 .button{
 	width:auto;
-        margin:10px 0 0 200px;
+        margin:10px 0 0 225px;
         padding:3px 4px 3px 4px;
-        color:white;
-        background-color: #34696f;
+        color: white;
+        background-color: #1C140D;
         outline:none;
-        border:2px solid rgba(33, 68, 72, 0.59);
+        border:1px solid rgba(33, 68, 72, 0.59);
         font-weight:bold;
 
 }
+
 .greenButton{
 	width:auto;
 	margin:10px 0 0 2px;
@@ -135,13 +152,16 @@ input{
 	border:2px solid #006600;
 	font-weight:bold;
 }
+
 .greenButton:active{
 	background-color:#006600;
 	padding:4px 3px 2px 5px;
 }
+
 .error{
 	color:#F00;
 }
+
 .verify
 {
     margin-top: 4px;
@@ -150,6 +170,7 @@ input{
     width: 16px;
     height: 16px;
 }
+
 #footer{
 	color:#fff;
 	padding-top:20px;

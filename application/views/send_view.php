@@ -25,7 +25,6 @@ foreach($receivers as $row)
 	echo form_open('send/submit');
 	echo form_label("Subject: ");
 	echo form_input('documentName', '') . "</br>";
-//	echo form_label("To: ");
 	echo "To: " . form_dropdown('receiverName', $dropdown_array) . "</br>";
 	echo form_label("Description: ") . "<br />";
 	echo form_textarea('documentDescription', '') . "</br>";
