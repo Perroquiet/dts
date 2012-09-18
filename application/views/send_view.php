@@ -7,9 +7,21 @@ function con(message) {
 
  return false;
 }
+
+function add() {
+ var p = "<tr><td/><td align='left'>sdfdf</td></tr>";
+ $("#recipients").append(p);
+}
 </script>
 
 <?php
+$add_recipient = array (
+	'name'		=>	'addRecipient',
+	'id'		=>	'addRecipient',
+	'content'	=>	'Add Next Receiver',
+	'onClick'	=>	'return add()'
+);
+
 if (isset($receivers))
 $dropdown_array = array();
 
@@ -17,6 +29,7 @@ foreach($receivers as $row)
 {
 	$dropdown_array[$row->user_id] = $row->first_name . ' ' . $row->last_name;
 }
+
 
 ?>
 
@@ -26,62 +39,62 @@ foreach($receivers as $row)
 </div>
 
 <div id="content">
-	<br>
+	
 	<div class="send_form">
+	<div class='imagetable'>
+	<?php echo form_open('send/submit'); ?>
+	
+	<table align='center'>
+		<tr>
+			<td align='right'>
+				<b><?php echo form_label("Subject: "); ?></b>
+			</td>
+			<td align='left'>
+				<?php echo form_input('documentName', ''); ?> 
+				</br>
+			</td>
+		</tr>
+	</table>
+	<?php //echo form_label("To: "); ?>
+	<table id="recipients"  align='center'>	
+		<tr>
+			<td align='right'>
+				<b>
+				<?php echo "To:"; ?>
+				</b>
+			</td>
+			<td align='left'>
+				<?php echo form_dropdown('receiverName', $dropdown_array) . "&nbsp&nbsp". form_button($add_recipient); ?>
+				<br />
+			</td>
+		</tr>
+	</table>
+	<br/>
+	<table  align='center'>
+	<tr align='center'>
+		<td align='justify'>
+			<b>
+			<?php echo "Description: "; ?>
+			</b>
+		</td>
+		
+		<td>
+			<?php echo form_textarea('documentDescription', ''); ?>
+			<br/>
+		</td>
+	</tr>
+	<tr align='center'>
+		<td/>
+		<td align='center'>
+		<?php echo form_submit('submit', 'Submit', 'onclick="return con(\'Are you sure to send document(s). Please click ok or cancel button.\')"'); ?>
 
-	<?php
-	echo form_open('send/submit');
-	echo "<table align='center' class='imagetable'>";
-	echo "<tr>";
-	echo "<td align='right'>";
-	echo "<b>";
-	echo form_label("Subject: ");
-	echo "</b>";
-	echo "</td>";
+		</td>
+		
+	</tr>
 	
-	echo "<td align='left'>";
-	echo form_input('documentName', '') . "</br>";
-	echo "</td>";
-	echo "</tr>";
 	
-//	echo form_label("To: ");
-	echo "<tr>";
-	echo "<td align='right'>";
-	echo "<b>";
-	echo "To:"; 
-	echo "</b>";
-	echo "</td>";
-	echo "<td align='left'>";
-	echo form_dropdown('receiverName', $dropdown_array) . "<br />";
-	echo "</td>";
-	echo "</tr>";
-	
-	echo "<br>";
-	
-	echo "<tr align='center'>";
-	echo "<td align='justify'>";
-	echo "<b>";
-	echo "Description: ";
-	echo "</b>";
-	echo "</td>";
-	
-	echo "<td>";
-	echo form_textarea('documentDescription', '') . "</br>";
-	echo "</td>";
-	echo "</tr>";
-	echo "<td>";
-	echo "<td align='center'>";
-
-
-
-	echo form_submit('submit', 'Submit', 'onclick="return con(\'Are you sure to send document(s). Please click ok or cancel button.\')"');
-
-	echo "</td>";
-	echo "</td>";
-	echo "</tr>";
-	echo "</table>";
-	
-	echo form_close();
-	?>
+	<?php echo form_close(); ?>
+	</table>
+	</div>
 	</div>
 </div>

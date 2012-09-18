@@ -140,7 +140,7 @@ li a:hover{
 
 /* css for table send_view */
 
-table.imagetable {
+div.imagetable {
 	font-family: verdana,arial,sans-serif;
 	font-size:11px;
 	color:#333333;
@@ -148,18 +148,18 @@ table.imagetable {
 	border-color: #999999;
 	border-collapse: collapse;
 }
-table.imagetable th {
+div.imagetable th {
 	background:#b5cfd2 url('cell-blue.jpg');
 	border-width: 1px;
 	padding: 8px;
 	border-style: solid;
 	border-color: #999999;
 }
-table.imagetable td {
+div.imagetable td {
 	background:#dcddc0 url('cell-grey.jpg');
 	border-width: 0px;
 	padding: 8px;
 	border-style: solid;
 	border-color: #999999;
 }
-table.imagetable {font: normal 12px/150% Georgia, Times New Roman, Times, serif; background: #fff; overflow: hidden; border: 10px solid #125A99; -webkit-border-radius: 11px; -moz-border-radius: 11px; border-radius: 11px; }
+div.imagetable {font: normal 12px/150% Georgia, Times New Roman, Times, serif; background: #fff; overflow: hidden; border: 10px solid #125A99; -webkit-border-radius: 11px; -moz-border-radius: 11px; border-radius: 11px; }

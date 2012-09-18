@@ -203,7 +203,7 @@ class Home_model extends CI_Model {
 	public function update_verification($tracking_id) {
 		$data = array(
 			'verified' => 1,
-			'date_time_received' => date('Y-m-d H:i:s', time())
+			'date_time_received' => date('F d, Y g:ia', time())
 			);
 		$this->db->where('tracking_id', $tracking_id);
 		$this->db->update('tbldocument', $data);
