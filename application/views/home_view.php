@@ -47,14 +47,14 @@
 	{
 		//print_r($feeds);
 		echo '<table><tr><td width=1000px><div>Subject: <b>'.anchor('home/viewitem/'.$feed->tracking_id, $feed->name) . '</b> <i>';
-		echo ' Received: ';
+		// echo ' Received: ';
 		
-		if ($feed->verified == 0) {
-			echo "No";
-		} else {
-			echo "Yes";
-		}
-		echo "<br/>";
+		// if ($feed->verified == 0) {
+			// echo "No";
+		// } else {
+			// echo "Yes";
+		// }
+		// echo "<br/>";
 		if($user_id == $feed->sender) {
 			echo "To: ";
 		} else { 
@@ -85,42 +85,55 @@
 		if (isset($relations)) {
 			echo "<table>";
 			foreach ($documentView as $row) {
-				echo "<tr><td width=300px>";
+				echo "<tr><td>";
 				echo "<strong>Tracking ID: </strong>" . $row->tracking_id . "<br/>";
 				echo "<strong>Subject: </strong>" . $row->name . "<br/>";
 				echo "<strong>Description: </strong>" . $row->description . "<br/>";
 				echo "<strong>Date Sent: </strong>" . $row->date_time_sent . "<br/>";
-				echo "<strong>Received: </strong>";
-				if ($row->verified == 0) {
-					echo "No <br/>";
-				} else {
-					echo "Yes <br/>";
-				}
-				if ($row->date_time_received != NULL) {
-					echo "<strong>Date Received: </strong>".$row->date_time_received;
-				}
-				echo "</td>";
+				echo "</td></tr>";
 			}
+			echo "</table>";
+			echo "<hr/>";
+			echo "<table>";
+			echo "<tr>Tracker:<br/><br/>";
 			foreach ($relations as $row) {
-					echo "<td width=400px>";
-					if($user_id == $row->sender) {
+						if($user_id == $row->sender) {
+						echo "<td>";
 						echo "To: ";
-					} else { 
-						echo "From: ";
-					}
-					echo $row->first_name . ' ' . $row->last_name . '<br/>';
-					echo "Location: " . $row->location . "</td>";
+						echo $row->first_name . ' ' . $row->last_name . '<br/>';
+						echo "Location: " . $row->location . "<br/>";
+						echo "<strong>Received: </strong>";
+						
+						if ($row->verified == 0) {
+							echo "No <br/>";
+						} else {
+							echo "Yes <br/>";
+						}
+						
+						if ($row->date_time_received != NULL) {
+							echo "<strong>Date Received: </strong>".$row->date_time_received;
+						}
+						echo "<hr/>";
+						}
 					
-					if($user_id == $row->receiver) {
+						echo "</td></tr>";
+						if($user_id == $row->receiver) {
+						echo "From: ";
+						echo $row->first_name . ' ' . $row->last_name . '<br/>';
+						echo "Location: " . $row->location . "<br/>";
+						
 						foreach ($documentView as $verified)
 						if ($verified->verified == 0) {
 						echo "<td>";
 						echo "<ul id=\"navigation\">";
-						echo "<li>". anchor('home/verifydoc/'.$row->tracking_id, 'Received') . "</li>";
+						echo "<li>". anchor('home/verifydoc/'.$row->tracking_id .'/'. $user_id, 'Received') . "</li></td>";
 						}
 					}
+					
+					
 				}
-				echo "</table>";
+			echo "</tr>";
+			echo "</table>";
 		}
 	}
 

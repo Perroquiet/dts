@@ -26,37 +26,13 @@ class Home_model extends CI_Model {
 
 	public function get_feed_descriptions($user_id)
 	{
-		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbluser WHERE (tblsenders_receivers.sender = '.$user_id.' OR tblsenders_receivers.receiver = '.$user_id.') AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbluser.id = tblsenders_receivers.receiver';
+		$sql = 'SELECT DISTINCT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE (tblsenders_receivers.sender = '.$user_id.' OR tblsenders_receivers.receiver = '.$user_id.') AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND (tbldescription.user_id = tblsenders_receivers.receiver OR tbldescription.user_id = tblsenders_receivers.sender) AND tbldescription.user_id != '.$user_id.' ORDER BY tbldocument.tracking_id DESC';
 		$query = $this->db->query($sql);
-		if($query->num_rows() > 0)
-		{
+		if($query->num_rows() > 0) {
 			return $query->result();
 		} else {
 			return null;
 		}
-		
-	}
-	
-	public function get_feed_descriptions_beta($user_id)
-	{
-		$stream = array();
-		$feed_senders = $this->get_feed_descriptions_as_sender($user_id);
-		$feed_receivers = $this->get_feed_descriptions_as_receiver($user_id);
-		if($feed_senders == null) {
-			
-		} else {
-			foreach ($feed_senders as $row) {
-				array_push($stream, $row);
-			}
-		}
-		if($feed_receivers == null) { 
-			
-		} else {
-			foreach ($feed_receivers as $row) {
-				array_push($stream, $row);
-			}
-		}
-		return $stream;
 	}
 	
 	public function get_relations($user_id)
@@ -71,7 +47,7 @@ class Home_model extends CI_Model {
 	
 	public function get_feed_descriptions_as_sender($user_id)
 	{
-		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE tblsenders_receivers.sender = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbldescription.user_id = tblsenders_receivers.receiver';
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE tblsenders_receivers.sender = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbldescription.user_id = tblsenders_receivers.receiver ORDER BY tbldocument.tracking_id DESC';
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0)
 		{
@@ -84,7 +60,7 @@ class Home_model extends CI_Model {
 	
 	public function get_feed_descriptions_as_receiver($user_id)
 	{
-		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE tblsenders_receivers.receiver = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbldescription.user_id = tblsenders_receivers.sender AND tbldocument.verified = 1';
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE tblsenders_receivers.receiver = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbldescription.user_id = tblsenders_receivers.sender AND tblsenders_receivers.verified = 1 ORDER BY tbldocument.tracking_id DESC';
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0)
 		{
@@ -96,7 +72,7 @@ class Home_model extends CI_Model {
 	
 	public function get_non_verified_feeds($user_id)
 	{
-		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE tblsenders_receivers.receiver = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbldescription.user_id = tblsenders_receivers.sender AND tbldocument.verified = 0';
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE tblsenders_receivers.receiver = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbldescription.user_id = tblsenders_receivers.sender AND tblsenders_receivers.verified = 0 ORDER BY tbldocument.tracking_id DESC';
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0)
 		{
@@ -164,7 +140,7 @@ class Home_model extends CI_Model {
 		$this->db->where('tblsenders_receivers.tracking_id', $tracking_id);
 		$this->db->from('tbldocument');
 		$this->db->from('tblsenders_receivers');
-		$query = $this->db->get();
+		$query = $this->db->get('', 1, 1);
 		if($query->num_rows() > 0) {
 			return $query->result();
 		} else {
@@ -200,68 +176,32 @@ class Home_model extends CI_Model {
 		}
 	}
 	
-	public function update_verification($tracking_id) {
+	public function get_receivers_names($tracking_id) {
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldescription WHERE tracking_id = '.$tracking_id.' AND receiver = user_id';
+		// $this->db->where('tracking_id', $tracking_id);
+		// $this->db->where('receiver', 'user_id');
+		// $this->db->from('tblsenders_receivers');
+		// $this->db->from('tbldescription');
+		// $query = $this->db->get();
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return null;
+		}
+	}
+	
+	
+	public function update_verification($tracking_id, $receiver) {
 		$data = array(
 			'verified' => 1,
 			'date_time_received' => date('F d, Y g:ia', time())
 			);
 		$this->db->where('tracking_id', $tracking_id);
-		$this->db->update('tbldocument', $data);
-	}
-	
-	
-	public function get_all_stream_as_sender($user_id) {
-		$sql = 'select * from tbldocument, tblsenders_receivers where tblsenders_receivers.sender = ' . $user_id . ' or tblsenders_receivers.receiver = ' . $user_id;
-		$query = $this->db->query($sql);
-		foreach ($query->result() as $row)
-			return array(
-				$row->tracking_id,
-				$row->name,
-				$row->description,
-				$row->date_time_sent,
-				$row->sender,
-				$row->receiver
-			);
-	}
-
-	public function get_all_stream_as_receiver($user_id) {
-		$sql = 'select * from tbldocument, tblsenders_receivers where tbldocument.tracking_id = tblsenders_receivers.tracking_id and tblsenders_receivers.receiver = ' . $user_id;
-		$query = $this->db->query($sql);
-		foreach ($query->result() as $row)
-			return array(
-				$row->tracking_id,
-				$row->name,
-				$row->description,
-				$row->date_time_sent,
-				$row->sender,
-				$row->receiver
-			);
-	}	
-
-	public function get_all_stream($user_id) {
-		$data = array(array());
-		$sql = 'SELECT * FROM tbldocument, tblsenders_receivers WHERE tblsenders_receivers.tracking_id = tbldocument.tracking_id AND (tblsenders_receivers.sender = '.$user_id.' OR tblsenders_receivers.receiver = '.$user_id.')';
-		$query = $this->db->query($sql);
-		if($query->num_rows() >0 )
-		{
-		
-		for ($i = 0; $i<=$query->num_rows(); $i++)
-		{
-				// $row->tracking_id,
-				// $row->name,
-				// $row->description,
-				// $row->date_time,
-				// $row->sender,
-				// $row->receiver
-		}
-		
-			return $query->result();
-		}
-		else {
-			return null;
-		}
+		$this->db->where('receiver', $receiver);
+		$this->db->update('tblsenders_receivers', $data);
 	}
 	
 }
-//09071981954
+
 ?>

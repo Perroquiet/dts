@@ -12,26 +12,29 @@ class Send_model extends CI_Model {
 		$data = array(
 			'name' => $this->input->post('documentName'),
 			'description' => $this->input->post('documentDescription'),
-			'verified' => 0,
 			'date_time_sent' => date('F d, Y g:ia', time())
 		);
 		
 		$this->db->insert('tbldocument', $data);
 		
 		$tracking_id = mysql_insert_id();
-		$this->insert_sender_receiver($tracking_id,$this->home_model->get_user_id(), $this->input->post('receiverName'));
-	}
-	
-	public function get_tracking_id()
-	{
-	
+		
+		for ($i=1; $i<=100; $i++) {
+		
+			if (!$this->input->post('receiverName' . $i) == 0) {
+				$this->insert_sender_receiver($tracking_id, $this->home_model->get_user_id(), $this->input->post('receiverName' . $i));
+			} else {
+				return null;
+			}
+		}
 	}
 	
 	public function insert_sender_receiver($tracking_id,$sender_id, $receiver_id) {
 		$data = array(
 			'tracking_id' => $tracking_id,
 			'sender' => $sender_id,
-			'receiver' => $receiver_id
+			'receiver' => $receiver_id,
+			'verified' => 0
 		);
 		$this->db->insert('tblsenders_receivers', $data);
 	}

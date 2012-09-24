@@ -1,19 +1,3 @@
-<script type="text/javascript">
-function con(message) {
- var answer = confirm(message);
- if (answer) {
-  return true;
- }
-
- return false;
-}
-
-function add() {
- var p = "<tr><td/><td align='left'>sdfdf</td></tr>";
- $("#recipients").append(p);
-}
-</script>
-
 <?php
 $add_recipient = array (
 	'name'		=>	'addRecipient',
@@ -22,14 +6,19 @@ $add_recipient = array (
 	'onClick'	=>	'return add()'
 );
 
-if (isset($receivers))
-$dropdown_array = array();
+$subject = array(
+	'name'		=>	'documentName',
+	'value'		=>	set_value('subject')
+);
 
-foreach($receivers as $row)
-{
-	$dropdown_array[$row->user_id] = $row->first_name . ' ' . $row->last_name;
-}
 
+	if (isset($receivers)) {
+		$dropdown_array = array();
+		$dropdown_array[] = '';
+		foreach($receivers as $row)	{
+			$dropdown_array[$row->user_id] = $row->first_name . ' ' . $row->last_name;
+		}
+	}
 
 ?>
 
@@ -37,11 +26,11 @@ foreach($receivers as $row)
 	<?php echo anchor('login', 'Back'); ?>
 
 </div>
-
+<?php echo validation_errors('<p class="error">'); ?>
 <div id="content">
 	
 	<div class="send_form">
-	<div class='imagetable'>
+	
 	<?php echo form_open('send/submit'); ?>
 	
 	<table align='center'>
@@ -50,27 +39,28 @@ foreach($receivers as $row)
 				<b><?php echo form_label("Subject: "); ?></b>
 			</td>
 			<td align='left'>
-				<?php echo form_input('documentName', ''); ?> 
+				<?php echo form_input($subject); ?> 
 				</br>
 			</td>
 		</tr>
-	</table>
+	
 	<?php //echo form_label("To: "); ?>
-	<table id="recipients"  align='center'>	
-		<tr>
+	<tr>
 			<td align='right'>
 				<b>
 				<?php echo "To:"; ?>
 				</b>
 			</td>
 			<td align='left'>
-				<?php echo form_dropdown('receiverName', $dropdown_array) . "&nbsp&nbsp". form_button($add_recipient); ?>
+				<?php echo form_dropdown('receiverName1', $dropdown_array) . "</br>"; ?>
+				<?php echo form_dropdown('receiverName2', $dropdown_array) . "</br>"; ?>
+				<?php echo form_dropdown('receiverName3', $dropdown_array) . "</br>"; ?>
+				<?php //echo "<p id=\"rbutton\">&nbsp&nbsp". form_button($add_recipient). "</p>"; ?>
 				<br />
 			</td>
 		</tr>
-	</table>
+	
 	<br/>
-	<table  align='center'>
 	<tr align='center'>
 		<td align='justify'>
 			<b>
@@ -96,5 +86,21 @@ foreach($receivers as $row)
 	<?php echo form_close(); ?>
 	</table>
 	</div>
-	</div>
 </div>
+
+<script type="text/javascript">
+function con(message) {
+ var answer = confirm(message);
+ if (answer) {
+  return true;
+ }
+
+ return false;
+}
+
+function add() {
+ var p = "<tr><td/><td align='left'><?php echo form_dropdown('receiverName', $dropdown_array);?></td></tr>";
+ $("#recipients").append(p);
+ $("#rbutton").remove();
+}
+</script>

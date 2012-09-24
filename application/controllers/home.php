@@ -27,7 +27,7 @@ private $user_id;
 			$user_id = $this->home_model->get_user_id();
 			$this->data['user_id'] = $user_id;
 			
-			$feeds = $this->home_model->get_feed_descriptions_beta($user_id);
+			$feeds = $this->home_model->get_feed_descriptions($user_id);
 			if (isset($feeds)) {
 				foreach ($feeds as $feed) {
 					if ($feed->receiver == $user_id)
@@ -95,9 +95,11 @@ private $user_id;
 			foreach ($freeze as $row) {
 		
 				if ($row->sender == $this->home_model->get_user_id()) {
-					if ($this->home_model->get_sender_description($tracking_id, $row->receiver))
+					// if ($this->home_model->get_sender_description($tracking_id, $row->receiver))
+					if ($this->home_model->get_receivers_names($tracking_id))
 					{
-						$this->data['relations'] = $this->home_model->get_sender_description($tracking_id, $row->receiver);
+						//$this->data['relations'] = $this->home_model->get_sender_description($tracking_id, $row->receiver);
+						$this->data['relations'] = $this->home_model->get_receivers_names($tracking_id);
 					}
 				}
 			
@@ -112,12 +114,12 @@ private $user_id;
 			$this->load->view('includes/template.php', $this->data);
 	}
 	
-	public function verifydoc($tracking_id) {
+	public function verifydoc($tracking_id, $receiver) {
 			$this->data['logged_in'] = true;
 			$user_id = $this->home_model->get_user_id();
 			$this->data['user_id'] = $user_id;
 			
-			$this->home_model->update_verification($tracking_id);
+			$this->home_model->update_verification($tracking_id, $receiver);
 			redirect('home/not_verified');
 			
 	}
