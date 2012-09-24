@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 13, 2012 at 10:26 PM
+-- Generation Time: Sep 24, 2012 at 12:38 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -41,21 +41,10 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('11656beb6067ebb420b42a64f842b242', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1', 1347574557, 'a:3:{s:9:"user_data";s:0:"";s:8:"username";s:5:"jaina";s:12:"is_logged_in";b:1;}'),
-('d797075e7b9a6805dafab19c77758fb2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1', 1347574766, 'a:3:{s:9:"user_data";s:0:"";s:8:"username";s:12:"rodrigoSCSIT";s:12:"is_logged_in";b:1;}');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblcomments`
---
-
-CREATE TABLE IF NOT EXISTS `tblcomments` (
-  `tracking_id` char(16) NOT NULL,
-  `commentator` int(11) NOT NULL,
-  `comment` text NOT NULL,
-  `datetime` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+('7ecf0b569605272bd6863ffe381718ca', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1', 1348430510, 'a:3:{s:9:"user_data";s:0:"";s:8:"username";s:8:"lichking";s:12:"is_logged_in";b:1;}'),
+('96f6ac42774545573ae9ea2e05c610e1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1', 1348446966, 'a:3:{s:9:"user_data";s:0:"";s:8:"username";s:8:"lichking";s:12:"is_logged_in";b:1;}'),
+('dc90045ae5670e55ac065eba0d348291', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1', 1348430423, 'a:3:{s:9:"user_data";s:0:"";s:8:"username";s:10:"perroquiet";s:12:"is_logged_in";b:1;}'),
+('f6c507384992ee019b3948f141fec2cd', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1', 1348447022, '');
 
 -- --------------------------------------------------------
 
@@ -93,26 +82,9 @@ CREATE TABLE IF NOT EXISTS `tbldocument` (
   `tracking_id` int(16) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `description` text,
-  `verified` tinyint(4) NOT NULL,
-  `date_time_sent` datetime DEFAULT NULL,
-  `date_time_received` datetime DEFAULT NULL,
+  `date_time_sent` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`tracking_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
-
---
--- Dumping data for table `tbldocument`
---
-
-INSERT INTO `tbldocument` (`tracking_id`, `name`, `description`, `verified`, `date_time_sent`, `date_time_received`) VALUES
-(19, 'Forever alive.', 'Hello Miriam, can you check my paper about the report that you sent me last Tuesday? thanks.', 1, '2012-09-12 01:53:12', NULL),
-(20, 'CSC 155 Grades', 'Please check this sir!', 1, '2012-09-12 04:55:06', NULL),
-(21, 'Health Magazine', 'Kindly read this, its awesome!', 1, '2012-09-12 04:55:37', NULL),
-(22, 'Sample document', 'Weh', 1, '2012-09-12 04:56:19', NULL),
-(23, 'Hellow', 'sdcdc', 1, '2012-09-13 21:43:00', '2012-09-13 22:02:51'),
-(24, 'Docococo', 'dsfdsf', 1, '2012-09-13 21:54:00', '2012-09-13 21:55:00'),
-(25, 'Health Magazine', 'Read this its cool!', 1, '2012-09-13 22:10:38', '2012-09-13 22:14:22'),
-(26, 'Methodology', 'Tiwasa sa atong methodology!', 0, '2012-09-13 22:15:43', NULL),
-(27, 'SCS Utang List', 'Here is a complete list of your debts.', 0, '2012-09-13 22:17:22', NULL);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 -- --------------------------------------------------------
 
@@ -124,23 +96,9 @@ CREATE TABLE IF NOT EXISTS `tblsenders_receivers` (
   `tracking_id` int(8) NOT NULL,
   `sender` int(8) NOT NULL,
   `receiver` int(8) NOT NULL,
-  PRIMARY KEY (`tracking_id`)
+  `verified` tinyint(4) NOT NULL,
+  `date_time_received` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tblsenders_receivers`
---
-
-INSERT INTO `tblsenders_receivers` (`tracking_id`, `sender`, `receiver`) VALUES
-(19, 6, 5),
-(20, 5, 6),
-(21, 5, 6),
-(22, 3, 6),
-(23, 6, 2),
-(24, 6, 3),
-(25, 3, 6),
-(26, 3, 6),
-(27, 4, 6);
 
 -- --------------------------------------------------------
 
