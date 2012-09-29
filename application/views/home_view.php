@@ -91,11 +91,18 @@
 				echo "<strong>Description: </strong>" . $row->description . "<br/>";
 				echo "<strong>Date Sent: </strong>" . $row->date_time_sent . "<br/>";
 				echo "</td></tr>";
+				break;
 			}
 			echo "</table>";
 			echo "<hr/>";
 			echo "<table>";
-			echo "<tr>Tracker:<br/><br/>";
+			echo "<tr><strong>Current Location: </strong>";
+			if(isset($currentLocation)) {
+				foreach ($currentLocation as $row) {
+					echo $row->location . "<br/><br/>";
+					break;
+				}
+			}
 			foreach ($relations as $row) {
 						if($user_id == $row->sender) {
 						echo "<td>";
@@ -127,6 +134,7 @@
 						echo "<td>";
 						echo "<ul id=\"navigation\">";
 						echo "<li>". anchor('home/verifydoc/'.$row->tracking_id .'/'. $user_id, 'Received') . "</li></td>";
+						break;
 						}
 					}
 					

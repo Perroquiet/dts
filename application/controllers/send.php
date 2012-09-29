@@ -35,7 +35,7 @@ class Send extends CI_Controller {
 			$this->load->library('form_validation');
 			
 			$this->form_validation->set_rules('documentName', 'Subject', 'required');
-			$this->form_validation->set_rules('receiverName1', 'Receiver', 'required');		
+			$this->form_validation->set_rules('data0', 'Receiver', 'required');		
 			
 			
 			if($this->form_validation->run() == FALSE)
@@ -44,7 +44,7 @@ class Send extends CI_Controller {
 			} else {
 			
 			$this->send_model->insert_description();
-			redirect('home');
+			//redirect('home');
 			
 			}
 		}

@@ -86,19 +86,20 @@ private $user_id;
 			$this->data['logged_in'] = true;
 			$user_id = $this->home_model->get_user_id();
 			$this->data['user_id'] = $user_id;
-			
+			$this->data['currentLocation'] = $this->home_model->get_current_location($tracking_id);			
 			if ($this->home_model->get_document_info($tracking_id)) {
 				$this->data['documentView'] = $this->home_model->get_document_info($tracking_id);
 			}
 			
 			$freeze = $this->home_model->get_document_info($tracking_id);
+			
 			foreach ($freeze as $row) {
 		
 				if ($row->sender == $this->home_model->get_user_id()) {
-					// if ($this->home_model->get_sender_description($tracking_id, $row->receiver))
+					// 2 if ($this->home_model->get_sender_description($tracking_id, $row->receiver))
 					if ($this->home_model->get_receivers_names($tracking_id))
 					{
-						//$this->data['relations'] = $this->home_model->get_sender_description($tracking_id, $row->receiver);
+						// 2 $this->data['relations'] = $this->home_model->get_sender_description($tracking_id, $row->receiver);
 						$this->data['relations'] = $this->home_model->get_receivers_names($tracking_id);
 					}
 				}
@@ -112,6 +113,7 @@ private $user_id;
 			}
 			$this->data['main_content'] = 'home_view';
 			$this->load->view('includes/template.php', $this->data);
+			
 	}
 	
 	public function verifydoc($tracking_id, $receiver) {

@@ -140,7 +140,7 @@ class Home_model extends CI_Model {
 		$this->db->where('tblsenders_receivers.tracking_id', $tracking_id);
 		$this->db->from('tbldocument');
 		$this->db->from('tblsenders_receivers');
-		$query = $this->db->get('', 1, 1);
+		$query = $this->db->get();
 		if($query->num_rows() > 0) {
 			return $query->result();
 		} else {
@@ -202,6 +202,15 @@ class Home_model extends CI_Model {
 		$this->db->update('tblsenders_receivers', $data);
 	}
 	
+	public function get_current_location($tracking_id) {
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldescription WHERE receiver = user_id AND tracking_id = '.$tracking_id.' AND verified = 1 ORDER BY date_time_received DESC';
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return null;
+		}
+	}
 }
 
 ?>

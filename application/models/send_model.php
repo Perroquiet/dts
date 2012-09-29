@@ -19,14 +19,16 @@ class Send_model extends CI_Model {
 		
 		$tracking_id = mysql_insert_id();
 		
-		for ($i=1; $i<=100; $i++) {
+		for ($i=0; $i<=100; $i++) {
 		
-			if (!$this->input->post('receiverName' . $i) == 0) {
-				$this->insert_sender_receiver($tracking_id, $this->home_model->get_user_id(), $this->input->post('receiverName' . $i));
+			if (!$this->input->post('data' . $i) == 0) {
+				$this->insert_sender_receiver($tracking_id, $this->home_model->get_user_id(), $this->input->post('data' . $i));
 			} else {
 				return null;
 			}
 		}
+		//$this->insert_sender_receiver($tracking_id, $this->home_model->get_user_id(), $this->input->post('data[0]'));
+		
 	}
 	
 	public function insert_sender_receiver($tracking_id,$sender_id, $receiver_id) {
