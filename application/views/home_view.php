@@ -17,9 +17,7 @@
 </div>
 <div id="home">
 </div>
-	<div id="cpanel">
 
-	</div>
 	<div id="rounded">
 
 

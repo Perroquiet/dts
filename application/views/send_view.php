@@ -26,7 +26,7 @@ function insertText() {
 
 $("button#addRecipient").live( 'click', function(){
     $("#td1").append("<br />");
-    var cloned = $("#tr1 td:last").clone(false).appendTo( $("#td1") );
+	var cloned = $("#tr1 td:last").clone(false).appendTo( $("#td1") );
     cloned.find('[name^=data]').attr('name', function() {
         var index = this.name.match(/\d*(\d)/);
         if (index != null && index.length > 1) {
@@ -108,7 +108,7 @@ $subject = array(
 			</td>
 			<td align='left' id="td1" >
 				
-				<?php echo form_dropdown('data0', $dropdown_array); ?>
+				<?php echo form_dropdown('data0', $dropdown_array, '', 'id="sel1"'); ?>
 				<?php //echo form_dropdown('receiverName2', $dropdown_array) . "</br>"; ?>
 				<?php //echo form_dropdown('receiverName3', $dropdown_array) . "</br>"; ?>
 				
