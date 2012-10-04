@@ -25,17 +25,18 @@
 
     <ul id="navigation">
     <li><?php echo anchor('home', "Home"); ?></li>
-    <li><?php echo anchor('home/sort_send', "Sent"); ?></li>
-    <li><?php echo anchor('home/sort_received', "Received"); ?></li>
-    <li><?php echo anchor('home/not_verified', "Inbox"); ?></li>
+	<li><?php echo anchor('home/not_verified', "Inbox"); ?></li>
 	<li><?php echo anchor("send", "Send"); ?></li>
     </ul>
 
     <div class="clear"></div>
     
     <div id="pageContent">
-		<?php
-		
+	
+	<?php
+	echo anchor('home/sort_send', "Sent");
+	echo " | ";
+	echo anchor('home/sort_received', "Received");
 	// if(isset($user_info))
 	// echo "Name: " . $user_info[0] . " " . $user_info[1];
 	// echo "<br />Profession: " . $user_info[2] . " Location: " . $user_info[3];
@@ -43,16 +44,9 @@
 	if(isset($feeds))
 	foreach ($feeds as $feed)
 	{
-		//print_r($feeds);
-		echo '<table><tr><td width=1000px><div>Subject: <b>'.anchor('home/viewitem/'.$feed->tracking_id, $feed->name) . '</b> <i>';
-		// echo ' Received: ';
 		
-		// if ($feed->verified == 0) {
-			// echo "No";
-		// } else {
-			// echo "Yes";
-		// }
-		// echo "<br/>";
+		echo '<table><tr><td width=1000px><div>Subject: <b>'.anchor('home/viewitem/'.$feed->tracking_id, $feed->name) . '</b> <i>';
+		
 		if($user_id == $feed->sender) {
 			echo "To: ";
 		} else { 

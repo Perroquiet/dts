@@ -19,16 +19,32 @@ class Send_model extends CI_Model {
 		
 		$tracking_id = mysql_insert_id();
 		
-		for ($i=0; $i<=100; $i++) {
+		$recipient = explode(",", $this->input->post('recipients'));
 		
-			if (!$this->input->post('data' . $i) == 0) {
-				$this->insert_sender_receiver($tracking_id, $this->home_model->get_user_id(), $this->input->post('data' . $i));
+		$numberOfRecipients = count($recipient);
+		
+		for ($i=0; $i<$numberOfRecipients; $i++) {
+		
+			if (!$this->check_recipient_duplication($tracking_id, $this->home_model->get_user_id(), $recipient[$i])) {
+				$this->insert_sender_receiver($tracking_id, $this->home_model->get_user_id(), $recipient[$i]);
 			} else {
 				return null;
 			}
+			
 		}
-		//$this->insert_sender_receiver($tracking_id, $this->home_model->get_user_id(), $this->input->post('data[0]'));
-		
+	}
+	
+	public function check_recipient_duplication($tracking_id, $user_id, $recipient) {
+		$this->db->where('tracking_id', $tracking_id);
+		$this->db->where('sender', $user_id);
+		$this->db->where('receiver', $recipient);
+		$query = $this->db->get('tblsenders_receivers');
+		if ($query->num_rows() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public function insert_sender_receiver($tracking_id,$sender_id, $receiver_id) {
@@ -42,8 +58,10 @@ class Send_model extends CI_Model {
 	}
 	
 	public function get_id_and_names($user_id) {
-		$this->db->where('user_id !=', $user_id);
-		$query = $this->db->get('tbldescription');
+		$sql = "SELECT CONCAT(first_name, ' ', last_name) as name, user_id as id FROM tbldescription WHERE user_id != ".$user_id."";
+		//$this->db->where('user_id !=', $user_id);
+		//$query = $this->db->get('tbldescription');
+		$query = $this->db->query($sql);
 		return $query->result();
 	}
 

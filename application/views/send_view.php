@@ -1,4 +1,5 @@
 <script type="text/javascript">
+		
 function con(message) {
  var answer = confirm(message);
  if (answer) {
@@ -66,14 +67,14 @@ $subject = array(
 );
 
 
-	if (isset($receivers)) {
-		$dropdown_array = array();
-		$dropdown_array[] = '';
-		foreach($receivers as $row)	{
-			$dropdown_array[$row->user_id] = $row->first_name . ' ' . $row->last_name;
-		}
-	}
-
+	// if (isset($receivers)) {
+		// $dropdown_array = array();
+		// $dropdown_array[] = '';
+		// foreach($receivers as $row)	{
+			// $dropdown_array[$row->user_id] = $row->first_name . ' ' . $row->last_name;
+		// }
+	// }
+	
 ?>
 
 <div id="custom-header">
@@ -95,11 +96,10 @@ $subject = array(
 			<td align='left'>
 				<?php echo form_input($subject); ?> 
 				</br>
-				<?php echo form_button($add_recipient) ."<br/>"; ?>
+				<?php // echo form_button($add_recipient) ."<br/>"; ?>
 			</td>
 		</tr>
 	
-	<?php //echo form_label("To: "); ?>
 	<tr id="tr1">
 			<td align='right'>
 				<b>
@@ -108,13 +108,21 @@ $subject = array(
 			</td>
 			<td align='left' id="td1" >
 				
-				<?php echo form_dropdown('data0', $dropdown_array, '', 'id="sel1"'); ?>
-				<?php //echo form_dropdown('receiverName2', $dropdown_array) . "</br>"; ?>
-				<?php //echo form_dropdown('receiverName3', $dropdown_array) . "</br>"; ?>
+				    <input type="text" id="demo-input" name="recipients" />
+        
+					<script type="text/javascript">
+					$(document).ready(function() {
+						$("#demo-input").tokenInput(<?php echo $receivers; ?>, {
+							hintText: "Type in name of receiver(s) for the document",
+							//theme: "facebook"
+						});
+					});
+					
+					</script>
+    
+				<?php //echo form_dropdown('data0', $dropdown_array, '', 'id="sel1"'); ?>
 				
 			</td>
-			<!--<input type='button' id='add' value='Add' onClick="insertText()">-->
-				
 			
 		</tr>
 	
@@ -126,7 +134,7 @@ $subject = array(
 			</b>
 		</td>
 		
-		<td>
+		<td align='left'>
 			<?php echo form_textarea('documentDescription', ''); ?>
 			<br/>
 		</td>

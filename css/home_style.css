@@ -43,6 +43,7 @@ body{
 	padding-bottom:15px !ie7;
 }
 
+
 .clear{
 	clear:both;
 }
@@ -73,7 +74,7 @@ a:hover{
 	text-align:left;
 	width:100%;
 	zoom:1;
-	
+	border:2px solid #1C140D; 
 	background: rgb(254,255,232); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(254,255,232,1) 0%, rgba(214,219,191,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,255,232,1)), color-stop(100%,rgba(214,219,191,1))); /* Chrome,Safari4+ */

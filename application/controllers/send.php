@@ -7,10 +7,21 @@ class Send extends CI_Controller {
 		
 		$this->data['jquery_enabled'] = true;
 		$this->data['page_title'] = 'Send Document';
-		$this->data['cs_scripts'] = array(base_url() . 'css/home_style.css');
+		$this->data['cs_scripts'] = array(
+									base_url() . 'css/home_style.css',
+									base_url() . 'css/token-input-facebook.css',
+									base_url() . 'css/token-input.css'
+		
+									);
+		$this->data['js_scripts'] = array(base_url() . 'js/jquery.tokeninput.js');
 		
 		$this->load->model('send_model');
 		$this->load->model('home_model');
+	}
+	
+	function getRecipients() {
+		$data['receivers'] = $this->send_model->get_id_and_names($this->home_model->get_user_id());
+		$this->load->view('recipients_view', $data);
 	}
 	
 	function index() {
@@ -20,7 +31,7 @@ class Send extends CI_Controller {
 		}
 		else {
 			$this->data['login'] = true;
-			$this->data['receivers'] = $this->send_model->get_id_and_names($this->home_model->get_user_id());
+			$this->data['receivers'] = json_encode($this->send_model->get_id_and_names($this->home_model->get_user_id()));
 			
 			$this->data['main_content'] = 'send_view.php';
 			$this->load->view('includes/template.php', $this->data);
@@ -35,7 +46,7 @@ class Send extends CI_Controller {
 			$this->load->library('form_validation');
 			
 			$this->form_validation->set_rules('documentName', 'Subject', 'required');
-			$this->form_validation->set_rules('data0', 'Receiver', 'required');		
+			//$this->form_validation->set_rules('data0', 'Receiver', 'required');		
 			
 			
 			if($this->form_validation->run() == FALSE)
@@ -44,7 +55,7 @@ class Send extends CI_Controller {
 			} else {
 			
 			$this->send_model->insert_description();
-			//redirect('home');
+			redirect('home');
 			
 			}
 		}
