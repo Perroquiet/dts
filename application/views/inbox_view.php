@@ -1,12 +1,6 @@
-	<?php
-	echo "Filter: ";
-	echo anchor('home/sort_send', "Sent");
-	echo " | ";
-	echo anchor('home/sort_received', "Received");
-	
-	
-	if(!isset($feeds)) {
-		echo "<br/><p align=center>No documents sent or received yet.</p>";
+<?php
+if(!isset($feeds)) {
+		echo "<br/><p align=center>No documents yet to be received.</p>";
 	}
 	else {
 		foreach ($feeds as $feed)
@@ -38,6 +32,4 @@
 			
 		}
 	}
-	
-	?>
-	  
+?>

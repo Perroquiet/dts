@@ -77,10 +77,8 @@ $subject = array(
 	
 ?>
 
-<div id="custom-header">
-	<?php echo anchor('login', 'Back'); ?>
-
-</div>
+<div id="rounded">
+<div id="main" class="container">
 <?php echo validation_errors('<p class="error">'); ?>
 <div id="content">
 	
@@ -91,7 +89,7 @@ $subject = array(
 	<table align='center'>
 		<tr>
 			<td align='right'>
-				<b><?php echo form_label("Subject: "); ?></b>
+				<b><?php echo form_label("Document Name: "); ?></b>
 			</td>
 			<td align='left'>
 				<?php echo form_input($subject); ?> 
@@ -103,7 +101,7 @@ $subject = array(
 	<tr id="tr1">
 			<td align='right'>
 				<b>
-				<?php echo "To:"; ?>
+				<?php echo "Send to:"; ?>
 				</b>
 			</td>
 			<td align='left' id="td1" >
@@ -128,7 +126,7 @@ $subject = array(
 	
 	<br/>
 	<tr align='center'>
-		<td align='justify'>
+		<td align='right'>
 			<b>
 			<?php echo "Description: "; ?>
 			</b>
@@ -143,7 +141,7 @@ $subject = array(
 		<td/>
 		<td align='center'>
 		<?php echo form_submit('submit', 'Submit', 'onclick="return con(\'Are you sure to send document(s). Please click ok or cancel button.\')"'); ?>
-
+		<?php echo anchor(base_url(), 'Back'); ?>
 		</td>
 		
 	</tr>
@@ -152,4 +150,6 @@ $subject = array(
 	<?php echo form_close(); ?>
 	</table>
 	</div>
+</div>
+</div>
 </div>

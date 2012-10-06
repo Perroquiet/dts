@@ -25,6 +25,13 @@
 			<input type="password" id="password" name="password" value="<?php echo set_value('password'); ?>" /><span id="usr_verify" class="verify"></span> 		
 		    </td>
 		</tr>
+		<tr>
+            <td colspan="2" id="error">
+            <?php echo form_error('username'); ?><?php echo isset($errors['username'])?$errors['username']:''; ?>
+            <?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?>
+			<?php if(isset($mismatch)) { echo "Username and Password does not match."; } ?>
+			</td>
+         </tr>
 		</table>	
 	<input type="submit" class="button" value="login">
 	

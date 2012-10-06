@@ -9,6 +9,7 @@ class Send extends CI_Controller {
 		$this->data['page_title'] = 'Send Document';
 		$this->data['cs_scripts'] = array(
 									base_url() . 'css/home_style.css',
+									base_url() . 'css/send_style.css',
 									base_url() . 'css/token-input-facebook.css',
 									base_url() . 'css/token-input.css'
 		
@@ -17,6 +18,8 @@ class Send extends CI_Controller {
 		
 		$this->load->model('send_model');
 		$this->load->model('home_model');
+		$this->data['username'] = $this->home_model->get_user_info($this->home_model->get_user_id());
+		$this->data['header_content'] = 'custom_header_view.php';
 	}
 	
 	function getRecipients() {
@@ -30,6 +33,7 @@ class Send extends CI_Controller {
 			redirect('login');
 		}
 		else {
+			$this->data['logged_in'] = true;
 			$this->data['login'] = true;
 			$this->data['receivers'] = json_encode($this->send_model->get_id_and_names($this->home_model->get_user_id()));
 			
@@ -46,7 +50,7 @@ class Send extends CI_Controller {
 			$this->load->library('form_validation');
 			
 			$this->form_validation->set_rules('documentName', 'Subject', 'required');
-			//$this->form_validation->set_rules('data0', 'Receiver', 'required');		
+			$this->form_validation->set_rules('recipients', 'Receiver', 'required');		
 			
 			
 			if($this->form_validation->run() == FALSE)

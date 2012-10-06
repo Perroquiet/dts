@@ -21,13 +21,13 @@
 		<p>
 			<label for="location">Location:</label>
 				<?php $options = array(
-					'Information Technology Department' 							  => 'IT Dept.',
-					'Computer Science Department'   								  => 'CS Dept.',
-					'ESET Department'          							    		  => 'ESET Dept.',
-					'Dean'             				      							  => 'Dean',
-					'EC Department'             							 		  => 'ES Dept.',					
+					'Information Technology Department' 							  => 'IT Department',
+					'Computer Science Department'   								  => 'CS Department',
+					'ESET Department'          							    		  => 'ESET Department',
+					'Dean'             				      							  => 'Dean\'s Office',
+					'EC Department'             							 		  => 'EC Department',					
 					'DSA'             				 								  => 'DSA',
-					'Computer Center'          							              => 'Com. Center',				
+					'College of Engineering: Computer Center'			              => 'COE: Computer Center',				
                 ); 
              echo form_dropdown('location', $options, 'location'); ?>
 			 <span id="usr_verify" class="verify"></span>

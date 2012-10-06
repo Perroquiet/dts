@@ -82,10 +82,34 @@ class Home_model extends CI_Model {
 		}
 	}
 	
+	public function get_names_of_receivers($tracking_id, $user_id)
+	{
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldescription WHERE sender = '.$user_id.' AND tracking_id = '.$tracking_id.' AND receiver = user_id';
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0)
+		{
+			return $query->result();
+		} else {
+			return null;
+		}
+	}
+	
+	public function get_name_of_sender($tracking_id, $user_id)
+	{
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldescription WHERE receiver = '.$user_id.' AND tracking_id = '.$tracking_id.' AND sender = user_id';
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0)
+		{
+			return $query->result();
+		} else {
+			return null;
+		}
+	}
+	
 	public function get_descriptions_of_id($user_id)
 	{
-		$this->db->where('id', $user_id);
-		$query = $this->db->get('tbluser');
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get('tbldescription');
 		return $query->result();
 	}
 	

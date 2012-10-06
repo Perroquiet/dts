@@ -14,7 +14,7 @@ class Login_model extends CI_Model {
 		}
 		else
 		{
-			die();
+			return false;
 		}
 		
 	}   

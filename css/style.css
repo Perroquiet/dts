@@ -28,6 +28,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', end
 	*/
 }
 
+input[type=submit]:hover {
+	background: #287368;
+	cursor: pointer;
+}
+
 #rounded{
 
 	width:400px;

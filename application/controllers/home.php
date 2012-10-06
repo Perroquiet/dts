@@ -14,6 +14,8 @@ private $user_id;
 		$this->data['js_scripts'] = array(base_url() . 'js/home_script.js');
 		$this->data['cs_scripts'] = array(base_url() . 'css/home_style.css');
 		$this->data['username'] = $this->home_model->get_user_info($this->home_model->get_user_id());
+		$this->data['header_content'] = 'custom_header_view.php';
+		$this->data['main_content'] = 'main_view.php';
 	}
 	
 	public function index() {
@@ -26,19 +28,9 @@ private $user_id;
 			$this->data['logged_in'] = true;
 			$user_id = $this->home_model->get_user_id();
 			$this->data['user_id'] = $user_id;
-			
 			$feeds = $this->home_model->get_feed_descriptions($user_id);
-			if (isset($feeds)) {
-				foreach ($feeds as $feed) {
-					if ($feed->receiver == $user_id)
-					{
-						$this->data['if_receiver'] = $this->home_model->get_descriptions_of_id($feed->sender);
-					}
-				}
-			}
-			
 			$this->data['feeds'] = $feeds;
-			$this->data['main_content'] = 'home_view';
+			$this->data['sub_content'] = 'home_view';
 			$this->load->view('includes/template.php', $this->data);
 			
 		}
@@ -53,7 +45,7 @@ private $user_id;
 			$this->data['feeds'] = $this->home_model->get_feed_descriptions_as_sender($user_id);
 			}
 			
-			$this->data['main_content'] = 'home_view';
+			$this->data['sub_content'] = 'home_view';
 			$this->load->view('includes/template.php', $this->data);
 	}
 	
@@ -66,11 +58,11 @@ private $user_id;
 			$this->data['feeds'] = $this->home_model->get_feed_descriptions_as_receiver($user_id);
 			}
 			
-			$this->data['main_content'] = 'home_view';
+			$this->data['sub_content'] = 'home_view';
 			$this->load->view('includes/template.php', $this->data);
 	}
 	
-	public function not_verified() {
+	public function inbox() {
 			$this->data['logged_in'] = true;
 			$user_id = $this->home_model->get_user_id();
 			$this->data['user_id'] = $user_id;
@@ -78,7 +70,7 @@ private $user_id;
 			if ($this->home_model->get_non_verified_feeds($user_id)) {
 				$this->data['feeds'] = $this->home_model->get_non_verified_feeds($user_id);
 			}
-			$this->data['main_content'] = 'home_view';
+			$this->data['sub_content'] = 'inbox_view';
 			$this->load->view('includes/template.php', $this->data);
 	}
 	
@@ -111,7 +103,7 @@ private $user_id;
 					}
 				}
 			}
-			$this->data['main_content'] = 'home_view';
+			$this->data['sub_content'] = 'view_document_view';
 			$this->load->view('includes/template.php', $this->data);
 			
 	}
@@ -122,7 +114,7 @@ private $user_id;
 			$this->data['user_id'] = $user_id;
 			
 			$this->home_model->update_verification($tracking_id, $receiver);
-			redirect('home/not_verified');
+			redirect('home/inbox');
 			
 	}
 	
