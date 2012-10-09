@@ -14,6 +14,7 @@ private $user_id;
 		$this->data['js_scripts'] = array(base_url() . 'js/home_script.js');
 		$this->data['cs_scripts'] = array(base_url() . 'css/home_style.css');
 		$this->data['username'] = $this->home_model->get_user_info($this->home_model->get_user_id());
+		$this->data['home_url'] = base_url();
 		$this->data['header_content'] = 'custom_header_view.php';
 		$this->data['main_content'] = 'main_view.php';
 	}

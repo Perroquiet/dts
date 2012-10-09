@@ -1,3 +1,16 @@
+<script type="text/javascript">
+		
+function con(message) {
+ var answer = confirm(message);
+ if (answer) {
+  return true;
+ }
+
+ return false;
+
+}
+</script>
+
 <?php
 	if (isset($documentView)) {
 		if (isset($relations)) {
@@ -14,8 +27,8 @@
 			echo "</table>";
 			echo "<hr/>";
 			echo "<table>";
-			echo "<tr><strong>Current Location: </strong>";
 			if(isset($currentLocation)) {
+				echo "<tr><strong>Current Location: </strong>";
 				foreach ($currentLocation as $row) {
 					echo $row->location . "<br/><br/>";
 					break;
@@ -51,7 +64,7 @@
 						if ($verified->verified == 0) {
 						echo "<td>";
 						echo "<ul id=\"navigation\">";
-						echo "<li>". anchor('home/verifydoc/'.$row->tracking_id .'/'. $user_id, 'Received') . "</li></td>";
+						echo "<li>". anchor('home/verifydoc/'.$row->tracking_id .'/'. $user_id, 'Received', 'onclick="return con(\'Are you sure to mark this document as received? Click OK or cancel button.\')"') . "</li></td>";
 						break;
 						}
 					}

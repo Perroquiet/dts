@@ -140,7 +140,7 @@ $subject = array(
 	<tr align='center'>
 		<td/>
 		<td align='center'>
-		<?php echo form_submit('submit', 'Submit', 'onclick="return con(\'Are you sure to send document(s). Please click ok or cancel button.\')"'); ?>
+		<?php echo form_submit('submit', 'Submit', 'onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\')"'); ?>
 		<?php echo anchor(base_url(), 'Back'); ?>
 		</td>
 		
