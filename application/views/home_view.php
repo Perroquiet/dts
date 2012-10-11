@@ -1,3 +1,15 @@
+<script>
+
+function con(msg1) {
+ var answer = confirm(msg1);
+ if (answer) {
+  return true;
+ }
+
+ return false;
+}
+
+</script>
 	<?php
 	echo "Filter: ";
 	echo anchor('home/sort_send', "Sent");
@@ -12,7 +24,7 @@
 		foreach ($feeds as $feed)
 		{
 			
-			echo '<table><tr><td width=1000px><div>Subject: <b>'.anchor('home/viewitem/'.$feed->tracking_id, $feed->name) . '</b> <i>';
+			echo '<table><tr><td width=600px><div>Subject: <b>'.anchor('home/viewitem/'.$feed->tracking_id, $feed->name) . '</b> <i>';
 			
 			if($user_id == $feed->sender) {
 				echo "To: ";
@@ -31,7 +43,7 @@
 			echo "<td></div><div>";
 			echo "<ul id=\"navigation\">";
 			echo "<li>".anchor('home/viewitem/'.$feed->tracking_id,'View')."</li>";
-			echo "<li>".anchor('home/viewitem/'.$feed->tracking_id,'Delete')."</li>";
+			echo "<li>".anchor('home/viewitem/'.$feed->tracking_id,'Delete', 'onclick="return con(\'Are you sure you want to delete the document? Click OK or Cancel button.\');"')."</li>";
 			echo "</ul>";
 			echo "</td>";
 			echo "</div></tr></table><hr/>";

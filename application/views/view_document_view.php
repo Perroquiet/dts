@@ -37,9 +37,9 @@ function con(message) {
 			foreach ($relations as $row) {
 						if($user_id == $row->sender) {
 						echo "<td>";
-						echo "To: ";
+						echo "<strong>To: </strong>";
 						echo $row->first_name . ' ' . $row->last_name . '<br/>';
-						echo "Location: " . $row->location . "<br/>";
+						echo "<strong>Location: </strong>" . $row->location . "<br/>";
 						echo "<strong>Received: </strong>";
 						
 						if ($row->verified == 0) {

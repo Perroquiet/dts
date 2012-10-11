@@ -82,9 +82,9 @@
 	if (isset($jqueryui_enabled)){ 
 		if ($jqueryui_enabled) {
 			// application\public\js\libs\strict\js
-			echo "\t" . '<script src="' . base_url() . 'application/public/js/libs/strict/js/jquery-ui-1.8.11.custom.min.js"></script>' . "\r\n";
+			echo "\t" . '<script src="' . base_url() . 'js/jqueryui/jquery-ui-1.9.0.custom.min.js"></script>' . "\r\n";
 			// application\public\js\libs\strict\css\custom-theme
-			echo "\t" . '<link rel="stylesheet" href="' . base_url() . 'application/public/js/libs/strict/css/custom-theme/jquery-ui-1.8.11.custom.css">' . "\r\n";
+			echo "\t" . '<link rel="stylesheet" href="' . base_url() . 'js/jqueryui/jquery-ui-1.9.0.custom.min.css">' . "\r\n";
 		}
 	}	
 	

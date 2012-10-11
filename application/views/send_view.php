@@ -1,72 +1,87 @@
 <script type="text/javascript">
+
+
+	$( "#confirm-submit" ).click(function() {
+		jConfirm('Can you confirm this?', 'Confirmation Dialog', function(r) {
+		jAlert('Confirmed: ' + r, 'Confirmation Results');
+				
+		});
+	});
+
 		
-function con(message) {
- var answer = confirm(message);
- if (answer) {
-  return true;
- }
+// function con(msg1) {
+ // var answer = confirm(msg1);
+ // if (answer) {
+ // return true;
+ // }
 
- return false;
-}
+ // return false;
+ // }
 
-function add() {
- var p = "<tr><td/><td align='left'></td></tr>";
- $("#recipients").append(p);
- $("#rbutton").remove();
-}
+// $('#confirm-submit').click(function(){
+// $('#dialog_box').dialog({
+  // title: 'Really delete this stuff?',
+  // width: 500,
+  // height: 200,
+  // modal: true,
+  // resizable: false,
+  // draggable: false,
+  // buttons: [{
+  // text: 'Yep, delete it!',
+  // click: function(){
+      // delete it
+    // }
+  // },
+  // {
+  // text: 'Nope, my bad!',
+  // click: function() {
+      // $(this).dialog('close');
+    // }
+  // }]
+// });
+// });
 
-function insertText() {
-	var td1 = document.getElementById('td1');
-	//var append = $('#receiverName1 option').clone();
-	//var append = document.getElementById('td1').firstChild.data;
-	// var text = document.createNode();
-	var text = td1.cloneNode(true);
-	//td1.appendChild(text);
-	document.getElementById('td1').appendChild(text);
-}
+// $.fx.speeds._default = 100;
+    /*
+    $(function() {
+        //$( "#dialog:ui-dialog" ).dialog( "destroy" );
+		$( "#dialog-confirm" ).dialog({
+			autoOpen: false,
+			resizable: false,
+			modal: true,
+			buttons: {
+				"OK": function() {
+				
+                $("#formSubmit").submit();
+				$(this).dialog('close');
+				},
+				Cancel: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
 
-$("button#addRecipient").live( 'click', function(){
-    $("#td1").append("<br />");
-	var cloned = $("#tr1 td:last").clone(false).appendTo( $("#td1") );
-    cloned.find('[name^=data]').attr('name', function() {
-        var index = this.name.match(/\d*(\d)/);
-        if (index != null && index.length > 1) {
-            var newIndex = parseInt(index[1], 10) + 1; 
-            return this.name.replace(/\d*(\d)/, newIndex);
-        }
-        return this.name;    
-    });
-});
-
-
-function add() {
-// var $newSelect = $('select[name=receiverName0]')
-                    // .clone()
-                    // .attr('name', function(i,n) { 
-                         // var int = 
-                                // parseInt(n.match(/\d*/),10); 
-                         // return n.replace(/\d*/, int + 1); 
-                     // });
-					 
-					// $('#td1').append($newSelect.attr('name', 'receiverName'));
-					// $('#td1').append("<br/>");
-}
+		$( "#confirm-submit" ).click(function() {
+				$( "#dialog-confirm" ).dialog( "open" );
+				return false;
+			});
+			
+   });
+   */
+   
 </script>
 
 <?php
-$add_recipient = array (
-	'name'		=>	'addRecipient',
-	'id'		=>	'addRecipient',
-	'content'	=>	'Add Next Receiver',
-	'onClick'	=>	'return add()'
-);
-
 $subject = array(
 	'name'		=>	'documentName',
 	'value'		=>	set_value('subject')
 );
 
-
+$form_attrib = array(
+	'name'		=>	'formSubmit',
+	'id'		=>	'formSubmit',
+	'class'		=>	'formSubmit'
+);
 	// if (isset($receivers)) {
 		// $dropdown_array = array();
 		// $dropdown_array[] = '';
@@ -84,7 +99,7 @@ $subject = array(
 	
 	<div class="send_form">
 	
-	<?php echo form_open('send/submit'); ?>
+	<?php echo form_open('send/submit', $form_attrib); ?>
 	
 	<table align='center'>
 		<tr>
@@ -140,12 +155,19 @@ $subject = array(
 	<tr align='center'>
 		<td/>
 		<td align='center'>
-		<?php echo form_submit('submit', 'Submit', 'onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\')"'); ?>
+		<!--	
+		<div id="dialog-confirm" title="Empty the recycle bin?">
+			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure to send the document? Click OK or Cancel button.</p>
+		</div>
+		-->
+		<?php //echo form_submit('submit', 'Submit', 'onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\');"'); ?>
+		<?php echo form_submit('submit', 'Submit', 'id="confirm-submit"'); ?>
 		<?php echo anchor(base_url(), 'Back'); ?>
 		</td>
 		
 	</tr>
 	
+ 
 	
 	<?php echo form_close(); ?>
 	</table>

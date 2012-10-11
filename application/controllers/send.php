@@ -6,6 +6,7 @@ class Send extends CI_Controller {
 		parent::__construct();
 		
 		$this->data['jquery_enabled'] = true;
+		$this->data['jqueryui_enabled'] = true;
 		$this->data['page_title'] = 'Send Document';
 		$this->data['cs_scripts'] = array(
 									base_url() . 'css/home_style.css',
