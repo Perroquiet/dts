@@ -8,14 +8,13 @@ function con(msg1) {
 
  return false;
 }
-
 </script>
 	<?php
 	echo "Filter: ";
 	echo anchor('home/sort_send', "Sent");
 	echo " | ";
 	echo anchor('home/sort_received', "Received");
-	
+	echo "<hr/>";
 	
 	if(!isset($feeds)) {
 		echo "<br/><p align=center>No documents sent or received yet.</p>";
@@ -24,32 +23,43 @@ function con(msg1) {
 		foreach ($feeds as $feed)
 		{
 			
-			echo '<table><tr><td width=600px><div>Subject: <b>'.anchor('home/viewitem/'.$feed->tracking_id, $feed->name) . '</b> <i>';
+			echo '<table id="feed"><tr><td width=580px><div><strong>Document: </strong><b>';
 			
-			if($user_id == $feed->sender) {
-				echo "To: ";
-					echo $feed->first_name . ' ' . $feed->last_name . '<br /></i>';
-					
-			} else { 
-				echo "From: ";
-					echo $feed->first_name . ' ' . $feed->last_name . '<br /></i>';
-				
+			if ($feed->dept_id != null) {
+				echo anchor('home/viewitemdept/'.$feed->tracking_id, $feed->name);
 			}
+			else {
+				echo anchor('home/viewitem/'.$feed->tracking_id, $feed->name);
+			}
+			echo '</b><br/>';
 			
-			echo 'Date Sent: '.$feed->date_time_sent . "</br>";
+			
+			// echo "<i>";
+			// if($user_id == $feed->sender) {
+				// echo "To: ";
+					// echo $feed->first_name . ' ' . $feed->last_name . '<br /></i>';
+					
+			// } else { 
+				// echo "From: ";
+					// echo $feed->first_name . ' ' . $feed->last_name . '<br /></i>';
+				
+			// }
+			
+			
+			
+			
+			echo '<strong>Date Sent: </strong>'.$feed->date_time_sent . "</br>";
 			if ($feed->date_time_received != NULL) {
-				echo 'Date Received: '. $feed->date_time_received . "</td>";
+				echo '<strong>Date Received: </strong>'. $feed->date_time_received . "</td>";
 			} 		
-			echo "<td></div><div>";
+			echo "<td id=\"tdop\"></div><div>";
 			echo "<ul id=\"navigation\">";
-			echo "<li>".anchor('home/viewitem/'.$feed->tracking_id,'View')."</li>";
-			echo "<li>".anchor('home/viewitem/'.$feed->tracking_id,'Delete', 'onclick="return con(\'Are you sure you want to delete the document? Click OK or Cancel button.\');"')."</li>";
+			echo "<li id=\"op\">".anchor('home/viewitem/'.$feed->tracking_id,'View')."</li>";
+			echo "<li id=\"op\">".anchor('home/delete/'.$feed->tracking_id,'Delete', 'onclick="return con(\'Are you sure you want to delete the document? Click OK or Cancel button.\');"')."</li>";
 			echo "</ul>";
 			echo "</td>";
-			echo "</div></tr></table><hr/>";
-			
+			echo "</div></tr></table>";
 		}
 	}
 	
-	?>
-	  
+?>

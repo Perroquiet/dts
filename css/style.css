@@ -1,15 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
 body{
-	background: rgb(205,235,142);
-	background: -moz-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%, rgba(165,201,86,1) 100%);
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(205,235,142,1)), color-stop(100%,rgba(165,201,86,1)));
-	background: -webkit-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-	background: -o-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-	background: -ms-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-	background: radial-gradient(ellipse at center,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=1 );
-/*	font-family:Monaco,Consolas,'Lucida Grande','Lucida Console'; */
+
+	background: #E04848	
+		url(http://localhost/dts/public/bg.jpg) top center no-repeat;
+
 	font-family: Trebuchet MS;
 	font-size:16px;
 	text-shadow:rgba(0,0,0,0.01) 0 0 0;
@@ -59,11 +54,11 @@ input[type=submit]:hover {
 	background: -o-radial-gradient(center, ellipse cover,  rgba(249,252,247,1) 60%,rgba(245,249,240,1) 100%);
 	background: -ms-radial-gradient(center, ellipse cover,  rgba(249,252,247,1) 60%,rgba(245,249,240,1) 100%);
 	background: radial-gradient(ellipse at center,  rgba(249,252,247,1) 60%,rgba(245,249,240,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9fcf7', endColorstr='#f5f9f0',GradientType=1 );
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9fcf7', endColorstr='#f5f9f0',GradientType=1 );
 	width:300px;
 	padding:20px;
 	margin:0 auto;
-	border:2px solid #1C140D; 
+	border:5px solid #1C140D; 
 	background: -webkit- (linear, left top, left bottom, from(#fff), to(#cbd4e5));
 	background: -moz-linear-gradient(top,  #fff,  #cbd4e5);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#cbd4e5');
@@ -180,7 +175,7 @@ input{
 	color:#fff;
 	padding-top:20px;
 	text-align:center;
-	background: #454546;		
+	background: ;		
 	height: 20px;
 	clear:both;
 }

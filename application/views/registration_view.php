@@ -5,17 +5,17 @@
 	<?php echo form_open("signup/registration"); ?>
 		<p>
 			<label for="first_name">Firstname:</label>
-			<input type="text" id="first_name" name="first_name" value="<?php echo set_value('first_name'); ?>" /><span id="usr_verify" class="verify"></span>
+			<input type="text" id="first_name" name="first_name" value="<?php echo set_value('first_name'); ?>" placeholder="Orven" /><span id="usr_verify" class="verify"></span>
 		</p>
 		<p>
 			<label for="last_name">Lastname:</label>
-			<input type="text" id="last_name" name="last_name" value="<?php echo set_value('last_name'); ?>" /><span id="usr_verify" class="verify"></span>
+			<input type="text" id="last_name" name="last_name" value="<?php echo set_value('last_name'); ?>" placeholder="Llantos" /><span id="usr_verify" class="verify"></span>
 			
 		</p>
 		<p>
 			<label for="profession">Profession:</label>
 			
-			<input type="text" id="profession" name="profession" value="<?php echo set_value('profession'); ?>" /><span id="usr_verify" class="verify"></span>
+			<input type="text" id="profession" name="profession" value="<?php echo set_value('profession'); ?>" placeholder="Professor" /><span id="usr_verify" class="verify"></span>
 		</p>
     	<!-- LIST OF COLLEGES -->
 		<p>
@@ -24,7 +24,7 @@
 					'Information Technology Department' 							  => 'IT Department',
 					'Computer Science Department'   								  => 'CS Department',
 					'ESET Department'          							    		  => 'ESET Department',
-					'Dean'             				      							  => 'Dean\'s Office',
+					'SCS Dean\'s Office'			      							  => 'Dean\'s Office',
 					'EC Department'             							 		  => 'EC Department',					
 					'DSA'             				 								  => 'DSA',
 					'College of Engineering: Computer Center'			              => 'COE: Computer Center',				
@@ -35,7 +35,7 @@
 		
 		<p>
 			<label for="user_name">Username:</label>
-			<input type="text" id="username" name="username" value="<?php echo set_value('username'); ?>" /><span id="usr_verify" class="verify"></span>
+			<input type="text" id="username" name="username" value="<?php echo set_value('username'); ?>" placeholder="orvenllantos" /><span id="usr_verify" class="verify"></span>
 		</p>        
 		 <p>
 			<label for="password">Password:</label>

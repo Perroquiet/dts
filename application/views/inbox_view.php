@@ -6,7 +6,7 @@ if(!isset($feeds)) {
 		foreach ($feeds as $feed)
 		{
 			
-			echo '<table><tr><td width=1000px><div>Subject: <b>'.anchor('home/viewitem/'.$feed->tracking_id, $feed->name) . '</b> <i>';
+			echo '<table><tr><td width=580px><div>Subject: <b>'.anchor('home/viewitem/'.$feed->tracking_id, $feed->name) . '</b> <i>';
 			
 			if($user_id == $feed->sender) {
 				echo "To: ";

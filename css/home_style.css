@@ -1,20 +1,13 @@
 body,h1,h2,h3,p,td,quote,small,form,input,ul,li,ol,label{
 	margin:0px;
 	padding:0px;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family:Verdana, Helvetica, sans-serif;
 }
 
 body{
 
-	background: rgb(205,235,142);
-	background: -moz-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%, rgba(165,201,86,1) 100%);
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(205,235,142,1)), color-stop(100%,rgba(165,201,86,1)));
-	background: -webkit-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-	background: -o-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-	background: -ms-radial-gradient(center, ellipse cover,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-	background: radial-gradient(ellipse at center,  rgba(205,235,142,1) 0%,rgba(165,201,86,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=1 );
-	/*margin-top:20px;*/
+	background: #E04848	
+		url(http://localhost/dts/public/bg.jpg) top center no-repeat;
 	font-size:13px;
 	text-align:center;
 }
@@ -22,7 +15,6 @@ body{
 /*Custom header*/
 #custom-header{
 	padding-top: 5px;
-/*	background-color:#F0F0D8; */
 	height:30px;
 	background: rgb(254,255,232); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(254,255,232,1) 0%, rgba(214,219,191,1) 100%); /* FF3.6+ */
@@ -42,6 +34,7 @@ body{
 #header{
 	margin:0 auto;
 	padding-bottom:15px !ie7;
+	border-bottom: 5px solid #1C140D;
 }
 
 
@@ -59,6 +52,22 @@ a:hover{
 	text-decoration:underline;
 }
 
+table#feed{
+display:block;
+border:2px solid #1C140D;
+margin: 5px;
+padding: 3px 3px 1px 1px;
+-moz-border-radius:5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius:5px;
+
+}
+
+td#tdop{
+	padding: 0px 0px 25px 0px;
+}
+
 #rounded{
 	width:800px;
 	margin:0px auto;
@@ -74,7 +83,7 @@ a:hover{
 	text-align:left;
 	width:100%;
 	zoom:1;
-	border:2px solid #1C140D; 
+	border:5px solid #1C140D; 
 	background: rgb(254,255,232); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(254,255,232,1) 0%, rgba(214,219,191,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,255,232,1)), color-stop(100%,rgba(214,219,191,1))); /* Chrome,Safari4+ */
@@ -88,7 +97,7 @@ a:hover{
 h1{
 	font-size:28px;
 	font-weight:bold;
-	font-family:"Trebuchet MS",Arial, Helvetica, sans-serif;
+	font-family:Arial, Helvetica, sans-serif;
 }
 
 h2{
@@ -106,8 +115,11 @@ li{
 	list-style:none;
 	display:block;
 	float:left;
-	width:80px;
 	
+}
+
+li#op{
+	width:80px;
 }
 
 li a,li a:visited{
@@ -153,8 +165,10 @@ li a:hover{
 #footer {
    padding-top: 30px;
    bottom:0;
-    /* Height of the footer */
+	color: #FFF;
+   /* Height of the footer */
 }
+
 
 /* css for table send_view */
 

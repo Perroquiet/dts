@@ -1,5 +1,5 @@
 <?php $this->load->view('includes/header'); ?>
-
+<?php if (isset($messages_content)) { $this->load->view($messages_content); } ?>
 	<div id="container">
 		<header>
 		</header>

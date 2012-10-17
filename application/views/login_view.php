@@ -1,5 +1,5 @@
 <div id="content">
-<html><body><center><img src=<?php echo '"' . base_url() . 'public/logo1.png"' ?> /></center></body></html>
+<html><body><center><img src=<?php echo '"' . base_url() . 'public/logo.png"' ?> /></center></body></html>
 	
 	<br>
 	<div class="login_form">
@@ -15,14 +15,14 @@
 			<tr>
 				<td align="right">Username: </td>
 				<td align="left">			
-			<input type="text" id="username" name="username" value="<?php echo set_value('username'); ?>" /><span id="usr_verify" class="verify"></span>
+				<input type="text" id="username" name="username" value="<?php echo set_value('username'); ?>" placeholder="Username" /><span id="usr_verify" class="verify"></span>
 				</td>
 			</tr>
 			
 		<tr>
 			<td align="right">Password: </td>
 		    <td align="left">
-			<input type="password" id="password" name="password" value="<?php echo set_value('password'); ?>" /><span id="usr_verify" class="verify"></span> 		
+			<input type="password" id="password" name="password" value="<?php echo set_value('password'); ?>" placeholder="Password" /><span id="usr_verify" class="verify"></span> 		
 		    </td>
 		</tr>
 		<tr>

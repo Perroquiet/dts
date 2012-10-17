@@ -15,7 +15,8 @@ var counterValue = parseInt($('.bubble').html());
     <ul id="navigation">
     <li><?php echo anchor('home', "Home"); ?></li>
 	<li><?php echo anchor('home/inbox', "Inbox"); ?></li>
-	<li><?php echo anchor("send", 'Send'); ?></li>
+	<li><?php echo anchor("send", 'Send by Person'); ?></li>
+	<li><?php echo anchor("send/bydepartment", 'Send by Department'); ?></li>
     </ul>
 
     <div class="clear"></div>

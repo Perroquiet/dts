@@ -1,80 +1,26 @@
 <script type="text/javascript">
 
+function con(msg1) {
+ var answer = confirm(msg1);
+ if (answer) {
+ return true;
+ }
 
-	$( "#confirm-submit" ).click(function() {
-		jConfirm('Can you confirm this?', 'Confirmation Dialog', function(r) {
-		jAlert('Confirmed: ' + r, 'Confirmation Results');
-				
-		});
+ return false;
+ }
+
+ 	$("#sentlink").click(function(){ 
+			$().toastmessage('showToast',{text:'Sent!', position:'middle-right',type:'success'});
+		}
 	});
-
-		
-// function con(msg1) {
- // var answer = confirm(msg1);
- // if (answer) {
- // return true;
- // }
-
- // return false;
- // }
-
-// $('#confirm-submit').click(function(){
-// $('#dialog_box').dialog({
-  // title: 'Really delete this stuff?',
-  // width: 500,
-  // height: 200,
-  // modal: true,
-  // resizable: false,
-  // draggable: false,
-  // buttons: [{
-  // text: 'Yep, delete it!',
-  // click: function(){
-      // delete it
-    // }
-  // },
-  // {
-  // text: 'Nope, my bad!',
-  // click: function() {
-      // $(this).dialog('close');
-    // }
-  // }]
-// });
-// });
-
-// $.fx.speeds._default = 100;
-    /*
-    $(function() {
-        //$( "#dialog:ui-dialog" ).dialog( "destroy" );
-		$( "#dialog-confirm" ).dialog({
-			autoOpen: false,
-			resizable: false,
-			modal: true,
-			buttons: {
-				"OK": function() {
-				
-                $("#formSubmit").submit();
-				$(this).dialog('close');
-				},
-				Cancel: function() {
-					$( this ).dialog( "close" );
-				}
-			}
-		});
-
-		$( "#confirm-submit" ).click(function() {
-				$( "#dialog-confirm" ).dialog( "open" );
-				return false;
-			});
-			
-   });
-   */
-   
+ 
 </script>
 
 <?php
 $subject = array(
-	'name'		=>	'documentName',
-	'value'		=>	set_value('subject')
+	'name'			=>	'documentName',
+	'value'			=>	set_value('subject'),
+	'placeholder'	=>	'Name of Document' 
 );
 
 $form_attrib = array(
@@ -82,24 +28,30 @@ $form_attrib = array(
 	'id'		=>	'formSubmit',
 	'class'		=>	'formSubmit'
 );
-	// if (isset($receivers)) {
-		// $dropdown_array = array();
-		// $dropdown_array[] = '';
-		// foreach($receivers as $row)	{
-			// $dropdown_array[$row->user_id] = $row->first_name . ' ' . $row->last_name;
-		// }
-	// }
-	
+
+$page_nums = array(
+	'name'		=>	'pageNum',
+	'id'		=>	'pageNum'
+);
 ?>
 
 <div id="rounded">
 <div id="main" class="container">
+<h1>Send a Document</h1>
+<h2>by <?php echo $bywhat; ?></h2>
 <?php echo validation_errors('<p class="error">'); ?>
 <div id="content">
 	
 	<div class="send_form">
 	
-	<?php echo form_open('send/submit', $form_attrib); ?>
+	<?php 
+	if ($bywhat == 'Person') {
+	echo form_open('send/submit', $form_attrib);
+	} else if ($bywhat == 'Department'){
+	echo form_open('send/submitdept', $form_attrib);
+	}
+		
+	?>
 	
 	<table align='center'>
 		<tr>
@@ -116,7 +68,7 @@ $form_attrib = array(
 	<tr id="tr1">
 			<td align='right'>
 				<b>
-				<?php echo "Send to:"; ?>
+				<?php echo "Send to (by ".$bywhat."): "; ?>
 				</b>
 			</td>
 			<td align='left' id="td1" >
@@ -127,13 +79,11 @@ $form_attrib = array(
 					$(document).ready(function() {
 						$("#demo-input").tokenInput(<?php echo $receivers; ?>, {
 							hintText: "Type in name of receiver(s) for the document",
-							//theme: "facebook"
+							theme: "facebook"
 						});
 					});
 					
 					</script>
-    
-				<?php //echo form_dropdown('data0', $dropdown_array, '', 'id="sel1"'); ?>
 				
 			</td>
 			
@@ -148,20 +98,27 @@ $form_attrib = array(
 		</td>
 		
 		<td align='left'>
-			<?php echo form_textarea('documentDescription', ''); ?>
+			<?php echo form_textarea('documentDescription', '', 'placeholder="Description"' ); ?>
 			<br/>
 		</td>
 	</tr>
+	<br/>
+	<tr align='center'>
+		<td align='right'>
+			<b>
+			<?php echo "# of pages: "; ?>
+			</b>
+		</td>
+		<td align='left'>
+			<?php echo form_input($page_nums); ?>
+			<br/>
+		</td>
+	</tr>
+	<br/>
 	<tr align='center'>
 		<td/>
 		<td align='center'>
-		<!--	
-		<div id="dialog-confirm" title="Empty the recycle bin?">
-			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure to send the document? Click OK or Cancel button.</p>
-		</div>
-		-->
-		<?php //echo form_submit('submit', 'Submit', 'onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\');"'); ?>
-		<?php echo form_submit('submit', 'Submit', 'id="confirm-submit"'); ?>
+		<?php echo form_submit('submit', 'Submit', 'id="sentlink" onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\');"'); ?>
 		<?php echo anchor(base_url(), 'Back'); ?>
 		</td>
 		
