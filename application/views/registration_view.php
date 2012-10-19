@@ -24,10 +24,11 @@
 					'Information Technology Department' 							  => 'IT Department',
 					'Computer Science Department'   								  => 'CS Department',
 					'ESET Department'          							    		  => 'ESET Department',
-					'SCS Dean\'s Office'			      							  => 'Dean\'s Office',
+					'SCS Dean\'s Office'			      							  => 'SCS Dean\'s Office',
 					'EC Department'             							 		  => 'EC Department',					
 					'DSA'             				 								  => 'DSA',
-					'College of Engineering: Computer Center'			              => 'COE: Computer Center',				
+					'College of Engineering: Computer Center'			              => 'COE: Computer Center',
+					'Executive Council'												  => 'SCS Executive Council'
                 ); 
              echo form_dropdown('location', $options, 'location'); ?>
 			 <span id="usr_verify" class="verify"></span>

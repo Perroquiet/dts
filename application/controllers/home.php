@@ -166,10 +166,10 @@ private $user_id;
 					}
 				}
 			
-				else if ($row->receiver = $this->home_model->get_user_id()) {
-					if ($this->home_model->get_receiver_description($tracking_id, $row->sender))
+				else if ($row->dept_id == $this->home_model->get_department_id_by_handler($this->home_model->get_user_id())) {
+					if ($this->home_model->get_department_sender_details($tracking_id, $row->dept_id))
 					{
-						$this->data['relations'] = $this->home_model->get_receiver_description($tracking_id, $row->sender);
+						$this->data['relations'] = $this->home_model->get_department_sender_details($tracking_id, $row->dept_id);
 					}
 				}
 			}

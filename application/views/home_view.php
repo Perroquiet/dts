@@ -34,27 +34,19 @@ function con(msg1) {
 			echo '</b><br/>';
 			
 			
-			// echo "<i>";
-			// if($user_id == $feed->sender) {
-				// echo "To: ";
-					// echo $feed->first_name . ' ' . $feed->last_name . '<br /></i>';
-					
-			// } else { 
-				// echo "From: ";
-					// echo $feed->first_name . ' ' . $feed->last_name . '<br /></i>';
-				
-			// }
-			
-			
-			
-			
 			echo '<strong>Date Sent: </strong>'.$feed->date_time_sent . "</br>";
 			if ($feed->date_time_received != NULL) {
 				echo '<strong>Date Received: </strong>'. $feed->date_time_received . "</td>";
 			} 		
 			echo "<td id=\"tdop\"></div><div>";
 			echo "<ul id=\"navigation\">";
-			echo "<li id=\"op\">".anchor('home/viewitem/'.$feed->tracking_id,'View')."</li>";
+			if ($feed->dept_id != null) {
+				echo "<li id=\"op\">".anchor('home/viewitemdept/'.$feed->tracking_id,'View')."</li>";
+			}
+			else {
+				echo "<li id=\"op\">".anchor('home/viewitem/'.$feed->tracking_id,'View')."</li>";
+			}
+			
 			echo "<li id=\"op\">".anchor('home/delete/'.$feed->tracking_id,'Delete', 'onclick="return con(\'Are you sure you want to delete the document? Click OK or Cancel button.\');"')."</li>";
 			echo "</ul>";
 			echo "</td>";

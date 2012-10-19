@@ -27,7 +27,8 @@ class Home_model extends CI_Model {
 	public function get_feed_descriptions($user_id)
 	{
 		//$sql = 'SELECT DISTINCT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE (tblsenders_receivers.sender = '.$user_id.' OR tblsenders_receivers.receiver = '.$user_id.') AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND (tbldescription.user_id = tblsenders_receivers.receiver OR tbldescription.user_id = tblsenders_receivers.sender) AND tbldescription.user_id != '.$user_id.' ORDER BY tbldocument.tracking_id DESC';
-		$sql = 'SELECT DISTINCT * FROM tblsenders_receivers, tbldocument WHERE (tblsenders_receivers.sender = '.$user_id.' OR tblsenders_receivers.receiver = '.$user_id.') AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tblsenders_receivers.display = 1 GROUP BY tblsenders_receivers.tracking_id ORDER BY tbldocument.tracking_id DESC ';
+		//$sql = 'SELECT DISTINCT * FROM tblsenders_receivers, tbldocument WHERE (tblsenders_receivers.sender = '.$user_id.' OR tblsenders_receivers.receiver = '.$user_id.' OR tbloffices.id = tblsenders_receivers.dept_id) AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tblsenders_receivers.display = 1 GROUP BY tblsenders_receivers.tracking_id ORDER BY tbldocument.tracking_id DESC ';
+		$sql = 'SELECT DISTINCT * FROM tbloffices, tblsenders_receivers, tbldocument WHERE ((tbloffices.id = tblsenders_receivers.dept_id AND tbloffices.handler = '.$user_id.') OR tblsenders_receivers.sender = '.$user_id.' OR tblsenders_receivers.receiver = '.$user_id.') AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tblsenders_receivers.display = 1 GROUP BY tblsenders_receivers.tracking_id ORDER BY tbldocument.tracking_id DESC';
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0) {
 			return $query->result();
@@ -233,6 +234,32 @@ class Home_model extends CI_Model {
 		}
 	}
 	
+	public function get_department_sender_details($tracking_id, $dept_id) {
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE tbldocument.tracking_id = '.$tracking_id.' AND tblsenders_receivers.tracking_id = '.$tracking_id.' AND tblsenders_receivers.sender = tbldescription.user_id AND tblsenders_receivers.dept_id = '.$dept_id;
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return null;
+		}
+	}
+	
+	public function get_department_id_by_handler($user_id) {
+		$this->db->where('handler', $user_id);
+		$query = $this->db->get('tbloffices');
+		if($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				return $row->id;
+			}
+		} else {
+			return null;
+		}
+	}
+	
+	// public function get_department_sender_details($tracking_id, $user_id) {
+		// $sql = 'SELECT * FROM ';
+	// }
+	
 	public function delete_feed($tracking_id, $user_id) {
 		// $data = array (
 			// 'display' => 0
@@ -252,11 +279,12 @@ class Home_model extends CI_Model {
 			);
 		$this->db->where('tracking_id', $tracking_id);
 		$this->db->where('receiver', $receiver);
+		$this->db->or_where('dept_id', $receiver);
 		$this->db->update('tblsenders_receivers', $data);
 	}
 	
 	public function get_current_location($tracking_id) {
-		$sql = 'SELECT * FROM tblsenders_receivers, tbldescription WHERE receiver = user_id AND tracking_id = '.$tracking_id.' AND verified = 1 ORDER BY date_time_received DESC';
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldescription, tbloffices WHERE (receiver = user_id OR tbloffices.id = tblsenders_receivers.dept_id) AND tracking_id = '.$tracking_id.' AND verified = 1 ORDER BY date_time_received DESC';
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0) {
 			return $query->result();

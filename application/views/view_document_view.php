@@ -12,6 +12,9 @@ function con(message) {
 </script>
 
 <?php
+
+$verified = false;
+
 	if (isset($documentView)) {
 		if (isset($relations)) {
 			echo "<table>";
@@ -25,90 +28,122 @@ function con(message) {
 				}
 				echo "<strong>Date Sent: </strong>" . $row->date_time_sent . "<br/>";
 				echo "</td></tr>";
+				$verified = $row->verified;
 				break;
 			}
 			echo "</table>";
 			echo "<hr/>";
-			echo "<table>";
-			if(isset($currentLocation)) {
-				echo "<tr><strong>Current Location: </strong>";
-				foreach ($currentLocation as $row) {
-					echo $row->location . "<br/><br/>";
-					break;
+			
+			foreach ($relations as $relation) {
+				if(isset($currentLocation)) {
+					echo "<strong>Current Location: </strong>";
+					if ($relation->dept_id == null) {
+					foreach ($currentLocation as $row) {
+						echo $row->location . "<br/><br/>";
+						break;
+					}
+					} else {
+						foreach ($currentLocation as $row) {
+						echo $row->office_name . "<br/><br/>";
+						break;
+					}
+					
+					}
 				}
+				break;
 			}
+			echo "<table>";
 			foreach ($relations as $row) {
 						if ($row->dept_id != null) {
-							echo "<strong>To: </strong>";
+							if($user_id == $row->sender) {
+							echo "<tr><td width=400px><strong>Sent to: </strong>";
 							echo $row->office_name . '<br/>';
-							echo "<strong>Location: </strong>" .$row->acronym .' - '. $row->office_name . "<br/>";
+							echo "</td><td>";
 							echo "<strong>Received: </strong>";
 							
 							if ($row->verified == 0) {
-								echo "No <br/>";
+								echo '<b id="not_received">No</b> <br/>';
 							} else {
-								echo "Yes <br/>";
+								echo '<b id="received">Yes</b> <br/>';
 							}
 							
 							if ($row->date_time_received != NULL) {
 								echo "<strong>Date Received: </strong>".$row->date_time_received;
 							}
-							echo "<hr/>";
+							
+							//echo "<hr/>";
 							
 						
 							echo "</td></tr>";
-							if($user_id == $row->receiver) {
+							echo "<tr><td><hr/></td><td><hr/></td></tr>";
+							}
+							
+							if($row->sender != $user_id) {
 							echo "<strong>From: </strong>";
 							echo $row->first_name . ' ' . $row->last_name . '<br/>';
 							echo "<strong>Location: </strong>" . $row->location . "<br/>";
-							break;
-							}
 							
+								if ($row->verified == 0) {
+								echo "<td>";
+								echo "<ul id=\"navigation\">";
+								echo "<li>". anchor('home/verifydoc/'.$row->tracking_id .'/'. $row->dept_id, 'Received', 'onclick="return con(\'Are you sure to mark this document as received? Click OK or cancel button.\')"') . "</li></td>";
+								break;
+								} else {
+								echo "<strong>Status: </strong>Received";
+								}
+							
+							}
 						}
 						else {
 							if($user_id == $row->sender) {
-							echo "<td>";
-							echo "<strong>To: </strong>";
-							echo $row->first_name . ' ' . $row->last_name . '<br/>';
-							echo "<strong>Location: </strong>" . $row->location . "<br/>";
-							echo "<strong>Received: </strong>";
-							
-							if ($row->verified == 0) {
-								echo "No <br/>";
-							} else {
-								echo "Yes <br/>";
-							}
-							
-							if ($row->date_time_received != NULL) {
-								echo "<strong>Date Received: </strong>".$row->date_time_received;
-							}
-							echo "<hr/>";
-							
+								echo "<tr><td width=400px>";
+								echo "<strong>To: </strong>";
+								echo $row->first_name . ' ' . $row->last_name . '<br/>';
+								echo "<strong>Location: </strong>" . $row->location . "<br/>";
+								
+								echo "</td><td>";
+								echo "<strong>Received: </strong>";
+								
+								if ($row->verified == 0) {
+									echo '<b id="not_received">No</b><br/>';
+								} else {
+									echo '<b id="received">Yes</b><br/>';
+								}
+								
+								if ($row->date_time_received != NULL) {
+									echo "<strong>Date Received: </strong>".$row->date_time_received;
+								}
+								
+								echo "</td>";
+								echo "<tr><td><hr/></td><td><hr/></td></tr>";
+								
 							}
 							
 							echo "</td></tr>";
-							if($user_id == $row->receiver) {
-							echo "<strong>From: </strong>";
-							echo $row->first_name . ' ' . $row->last_name . '<br/>';
-							echo "<strong>Location: </strong>" . $row->location . "<br/>";
-							
-							foreach ($documentView as $verified)
-							if ($verified->verified == 0) {
-							echo "<td>";
-							echo "<ul id=\"navigation\">";
-							echo "<li>". anchor('home/verifydoc/'.$row->tracking_id .'/'. $user_id, 'Received', 'onclick="return con(\'Are you sure to mark this document as received? Click OK or cancel button.\')"') . "</li></td>";
-							break;
+							if($user_id == $row->receiver)
+							{
+								echo "<strong>From: </strong>";
+								echo $row->first_name . ' ' . $row->last_name . '<br/>';
+								echo "<strong>Location: </strong>" . $row->location . "<br/>";
+								
+								//foreach ($documentView as $verified) {
+									if ($row->verified == 0) {
+									echo "<td>";
+									echo "<ul id=\"navigation\">";
+									echo "<li>". anchor('home/verifydoc/'.$row->tracking_id .'/'. $user_id, 'Received', 'onclick="return con(\'Are you sure to mark this document as received? Click OK or cancel button.\')"') . "</li></td>";
+									break;
+									} else {
+									echo "<strong>Status: </strong>Received";
+									}
+									
+								//}
 							}
-							// else if ($verified->verified == 1) {
-							
-							// }
-							
-						}
 					
-					}
+						}
 				}
 			echo "</tr>";
 			echo "</table>";
 		}
 	}
+	
 ?>

@@ -52,6 +52,10 @@ a:hover{
 	text-decoration:underline;
 }
 
+table{
+padding: 3px 10px 3px 10px;
+}
+
 table#feed{
 display:block;
 border:2px solid #1C140D;
@@ -156,6 +160,16 @@ li a:hover{
 
 #loading{
 	visibility:hidden;
+}
+
+b#not_received {
+	color: red;
+	font-size: 18px;
+}
+
+b#received {
+	color: green;
+	font-size: 18px;
 }
 
 .demo{
