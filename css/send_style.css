@@ -88,7 +88,7 @@ input#pageNum {
 }
 
 input[type=submit] {
-	border: 1px solid #008F00;
+	border: 1px solid #cc0000;
 	margin-right: 1cm;
 	padding: 6px;
 	text-decoration: none;
