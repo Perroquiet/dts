@@ -292,7 +292,6 @@ class Home_model extends CI_Model {
 			return null;
 		}
 	}
-	
 	public function get_forward_receivers_list($tracking_id, $receiver_id)
 	{
 		$sql = 'SELECT * FROM tbldescription, tblsenders_receivers WHERE receiver != '.$receiver_id.' AND tracking_id = '.$tracking_id.' AND receiver == user_id';

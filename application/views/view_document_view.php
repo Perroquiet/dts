@@ -126,17 +126,18 @@ $verified = false;
 								echo $row->first_name . ' ' . $row->last_name . '<br/>';
 								echo "<strong>Location: </strong>" . $row->location . "<br/>";
 								
-								//foreach ($documentView as $verified) {
-									if ($row->verified == 0) {
+								if ($row->verified == 0) {
 									echo "<td>";
 									echo "<ul id=\"navigation\">";
 									echo "<li>". anchor('home/verifydoc/'.$row->tracking_id .'/'. $user_id, 'Received', 'onclick="return con(\'Are you sure to mark this document as received? Click OK or cancel button.\')"') . "</li></td>";
 									break;
-									} else {
+								} else {
 									echo "<strong>Status: </strong>Received";
-									}
 									
-								//}
+								
+								}
+									
+								
 							}
 					
 						}
