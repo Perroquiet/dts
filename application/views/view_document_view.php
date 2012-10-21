@@ -15,6 +15,16 @@ cancel: {value: false, text: 'No', onclick: showValue }
 </script>
 
 <?php
+if (isset($forwardListPerson)) {
+
+	$forwardDropdown = array();
+	
+	foreach ($forwardListPerson as $row) {
+		$forwardDropdown[$row->receiver] = $row->first_name . ' ' . $row->last_name;
+	}
+	
+	//print_r($forwardDropdown);
+} 
 
 $verified = false;
 
@@ -125,19 +135,41 @@ $verified = false;
 							echo "</td></tr>";
 							if($user_id == $row->receiver)
 							{
+								echo "<td width=400px>";
 								echo "<strong>From: </strong>";
 								echo $row->first_name . ' ' . $row->last_name . '<br/>';
 								echo "<strong>Location: </strong>" . $row->location . "<br/>";
-								
+								echo "</td>";
 								if ($row->verified == 0) {
 									echo "<td>";
 									echo "<ul id=\"navigation\">";
 									echo "<li>". anchor('home/verifydoc/'.$row->tracking_id .'/'. $user_id, 'Received', 'onclick="return con(\'Are you sure to mark this document as received? Click OK or cancel button.\')"') . "</li></td>";
 									break;
 								} else {
-									echo "<strong>Status: </strong>Received";
+									echo "<td>";
+									echo '<strong>Status: </strong><b id="received">Received</b><br/>';
 									
-								
+									
+									if ($row->forwarded != 0) {
+										if (isset($forwardedDetails)) {
+											foreach ($forwardedDetails as $forwardedNgalan) {
+												echo "<strong>Forwarded to: </strong>";
+												echo $forwardedNgalan->first_name . ' ' .  $forwardedNgalan->last_name . "<br/>";
+												echo "<strong>Date Forwarded: </strong>" . $forwardedNgalan->date_time_forwarded;
+												break;
+											}
+										}
+									}
+									else {
+										
+										
+										echo "<strong>Forward to: </strong>";
+										echo form_open('home/forwardToPerson/' . $row->tracking_id);
+										echo form_dropdown('forwardId', $forwardDropdown);
+										echo form_submit('submit', 'Submit', 'id="sentlink" onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\');"');
+										echo form_close();
+									}
+									echo "</td>";
 								}
 									
 								

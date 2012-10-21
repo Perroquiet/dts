@@ -294,7 +294,30 @@ class Home_model extends CI_Model {
 	}
 	public function get_forward_receivers_list($tracking_id, $receiver_id)
 	{
-		$sql = 'SELECT * FROM tbldescription, tblsenders_receivers WHERE receiver != '.$receiver_id.' AND tracking_id = '.$tracking_id.' AND receiver == user_id';
+		$sql = 'SELECT * FROM tbldescription, tblsenders_receivers WHERE receiver != '.$receiver_id.' AND tracking_id = '.$tracking_id.' AND receiver = user_id AND forwarded = 0';
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return null;
+		}
+	}
+	
+	public function forward_to($tracking_id, $user_id) {
+		$data = array(
+			'forward_id'			=>	$this->input->post('forwardId'),
+			'date_time_forwarded'	=>	date('F d, Y g:ia', time()),
+			'forwarded'				=>	1
+		);
+		
+		$this->db->where('tracking_id', $tracking_id);
+		$this->db->where('receiver', $user_id);
+		$this->db->update('tblsenders_receivers', $data);
+	}
+	
+	public function get_forwarded_name($tracking_id, $user_id)
+	{
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldescription WHERE tracking_id = '.$tracking_id.' AND receiver = '.$user_id.' AND forward_id = user_id';
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0) {
 			return $query->result();
