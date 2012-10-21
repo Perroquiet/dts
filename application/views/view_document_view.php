@@ -1,14 +1,17 @@
 <script type="text/javascript">
-		
-function con(message) {
- var answer = confirm(message);
- if (answer) {
-  return true;
- }
+	
+var msg = new con(
+{
+title: 'Title',
+text: 'Alert Message',
+skin: 'default',
+width: 300,
+height: 300,
+ok: {value: true, text: 'Yes', onclick: showValue},
+cancel: {value: false, text: 'No', onclick: showValue }
+}); 
+	
 
- return false;
-
-}
 </script>
 
 <?php
