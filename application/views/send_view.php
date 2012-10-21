@@ -2,17 +2,18 @@
 
 function con(msg1) {
  var answer = confirm(msg1);
- if (answer) {
+ if (answer) alert("Are you sure you wish to continue to send document!");{
  return true;
  }
-
  return false;
  }
 
- 	$("#sentlink").click(function(){ 
+	/* $("#sentlink").click(function(){ 
 			$().toastmessage('showToast',{text:'Sent!', position:'middle-right',type:'success'});
 		}
-	});
+	});  */
+	
+
  
 </script>
 
@@ -118,14 +119,15 @@ $page_nums = array(
 	<tr align='center'>
 		<td/>
 		<td align='center'>
-		<?php echo form_submit('submit', 'Submit', 'id="sentlink" onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\');"'); ?>
+			 
+		<!-- <?php echo form_submit('submit', 'Submit', 'id="sentlink" onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\');"'); ?> -->
+		
+		<?php echo form_submit('submit', 'Submit','onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\');"'); ?>
 		<?php echo anchor(base_url(), 'Back'); ?>
 		</td>
 		
 	</tr>
-	
- 
-	
+		
 	<?php echo form_close(); ?>
 	</table>
 	</div>
