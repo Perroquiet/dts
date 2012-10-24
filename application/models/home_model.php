@@ -61,7 +61,7 @@ class Home_model extends CI_Model {
 	
 	public function get_feed_descriptions_as_sender($user_id)
 	{
-		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE tblsenders_receivers.sender = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbldescription.user_id = tblsenders_receivers.receiver AND tblsenders_receivers.display = 1 ORDER BY tbldocument.tracking_id DESC';
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument WHERE tblsenders_receivers.sender = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tblsenders_receivers.display = 1 GROUP BY tblsenders_receivers.tracking_id ORDER BY tbldocument.tracking_id DESC';
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0)
 		{
@@ -74,7 +74,7 @@ class Home_model extends CI_Model {
 	
 	public function get_feed_descriptions_as_receiver($user_id)
 	{
-		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument, tbldescription WHERE tblsenders_receivers.receiver = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tbldescription.user_id = tblsenders_receivers.sender AND tblsenders_receivers.verified = 1 ORDER BY tbldocument.tracking_id DESC';
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldocument WHERE tblsenders_receivers.receiver = '.$user_id.' AND tbldocument.tracking_id = tblsenders_receivers.tracking_id AND tblsenders_receivers.verified = 1 GROUP BY tblsenders_receivers.tracking_id ORDER BY tbldocument.tracking_id DESC';
 		$query = $this->db->query($sql);
 		if($query->num_rows() > 0)
 		{
@@ -292,6 +292,8 @@ class Home_model extends CI_Model {
 			return null;
 		}
 	}
+	
+// Forwarding	
 	public function get_forward_receivers_list($tracking_id, $receiver_id)
 	{
 		$sql = 'SELECT * FROM tbldescription, tblsenders_receivers WHERE receiver != '.$receiver_id.' AND tracking_id = '.$tracking_id.' AND receiver = user_id AND forwarded = 0';
@@ -325,6 +327,21 @@ class Home_model extends CI_Model {
 			return null;
 		}
 	}
+	
+	public function get_current_forwarded_location($tracking_id)
+	{
+		$sql = 'SELECT * FROM tblsenders_receivers, tbldescription WHERE tracking_id = '.$tracking_id.' AND forward_id = user_id ORDER BY date_time_forwarded DESC';
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return null;
+		}
+	}
+	
+//Uploading
+
+	
 }
 
 ?>

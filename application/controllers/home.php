@@ -111,8 +111,10 @@ private $user_id;
 			$user_id = $this->home_model->get_user_id();
 			$this->data['user_id'] = $user_id;
 			$this->data['currentLocation'] = $this->home_model->get_current_location($tracking_id);			
+			$this->data['currentForwarded'] = $this->home_model->get_current_forwarded_location($tracking_id);
 			if ($this->home_model->get_document_info($tracking_id)) {
 				$this->data['documentView'] = $this->home_model->get_document_info($tracking_id);
+				
 			}
 			
 			$freeze = $this->home_model->get_document_info($tracking_id);
@@ -132,7 +134,9 @@ private $user_id;
 					if ($this->home_model->get_receiver_description($tracking_id, $row->sender))
 					{
 						$this->data['relations'] = $this->home_model->get_receiver_description($tracking_id, $row->sender);
+						if ($this->home_model->get_forward_receivers_list($tracking_id, $this->home_model->get_user_id()) != null) {
 						$this->data['forwardListPerson'] = $this->home_model->get_forward_receivers_list($tracking_id, $this->home_model->get_user_id());
+						}
 						$this->data['forwardedDetails'] = $this->home_model->get_forwarded_name($tracking_id, $this->home_model->get_user_id());
 					}
 				}

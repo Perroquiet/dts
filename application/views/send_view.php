@@ -117,10 +117,23 @@ $page_nums = array(
 	</tr>
 	<br/>
 	<tr align='center'>
+		<td align='right'>
+			<b>
+			<?php echo "Attach a file: "; ?>
+			</b>
+		</td>
+		<td align='left'>
+			<?php echo form_upload('userfile', 'Choose File' ) ?>
+			<br/>
+		</td>
+	</tr>
+	<br/>
+	<tr align='center'>
 		<td/>
 		<td align='center'>
 			 
-		<!-- <?php echo form_submit('submit', 'Submit', 'id="sentlink" onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\');"'); ?> -->
+		<!-- <?php //echo form_submit('submit', 'Submit', 'id="sentlink" onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\');"'); ?> -->
+		
 		
 		<?php echo form_submit('submit', 'Submit','onclick="return con(\'Are you sure to send the document? Click OK or Cancel button.\');"'); ?>
 		<?php echo anchor(base_url(), 'Back'); ?>

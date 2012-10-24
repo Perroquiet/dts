@@ -52,12 +52,12 @@ $verified = false;
 					echo "<strong>Current Location: </strong>";
 					if ($relation->dept_id == null) {
 					foreach ($currentLocation as $row) {
-						echo $row->location . "<br/><br/>";
+						echo $row->location . "<br/>";
 						break;
 					}
 					} else {
 						foreach ($currentLocation as $row) {
-						echo $row->office_name . "<br/><br/>";
+						echo $row->office_name . "<br/>";
 						break;
 					}
 					
@@ -65,6 +65,13 @@ $verified = false;
 				}
 				break;
 			}
+			if (isset($currentForwarded)) {
+				foreach ($currentForwarded as $detail) {
+					echo "<strong>Currently forwarded to: </strong>";
+					echo $detail->first_name . ' ' . $detail->last_name . "<br/><br/>";
+					break;
+				}
+			}			
 			echo "<table>";
 			foreach ($relations as $row) {
 						if ($row->dept_id != null) {
@@ -160,8 +167,7 @@ $verified = false;
 											}
 										}
 									}
-									else {
-										
+									else if (isset($forwardListPerson)){
 										
 										echo "<strong>Forward to: </strong>";
 										echo form_open('home/forwardToPerson/' . $row->tracking_id);
@@ -170,6 +176,7 @@ $verified = false;
 										echo form_close();
 									}
 									echo "</td>";
+									
 								}
 									
 								
