@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 19, 2012 at 12:25 PM
+-- Generation Time: Oct 24, 2012 at 04:07 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -41,9 +41,12 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('63154da82a035d79cdd70753700a82cb', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4', 1350627542, 'a:3:{s:9:"user_data";s:0:"";s:8:"username";s:12:"orvenllantos";s:12:"is_logged_in";b:1;}'),
-('782baa09b34f317ed6995ab386d8ce2d', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1', 1350627644, 'a:3:{s:9:"user_data";s:0:"";s:8:"username";s:14:"alquinetaculin";s:12:"is_logged_in";b:1;}'),
-('ac898113a135512dd68a22954de1c780', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4', 1350649338, '');
+('104e24f1bafd4416a2e61bf7b8098189', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:14.0) Gecko/20100101 Firefox/14.0.1', 1350875138, 'a:3:{s:9:"user_data";s:0:"";s:8:"username";s:8:"eriksala";s:12:"is_logged_in";b:1;}'),
+('228e73a3b402e04b481de554799a40b1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4', 1350875437, 'a:2:{s:8:"username";s:12:"orvenllantos";s:12:"is_logged_in";b:1;}'),
+('4210c05f6ceab94e0427306fc434b1c8', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4', 1350888752, ''),
+('7a10d6bf9453e7cf98866cff9f71c89c', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4', 1350919785, ''),
+('dd1e0d404d1fc0cf68be9f5f9172f119', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4', 1351051587, 'a:3:{s:9:"user_data";s:0:"";s:8:"username";s:12:"orvenllantos";s:12:"is_logged_in";b:1;}'),
+('e6c42a2e38c5f2afc0cff7a17ee66abb', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4', 1350904432, '');
 
 -- --------------------------------------------------------
 
@@ -134,7 +137,21 @@ CREATE TABLE IF NOT EXISTS `tbldocument` (
   `date_time_sent` varchar(50) DEFAULT NULL,
   `page_number` int(16) DEFAULT NULL,
   PRIMARY KEY (`tracking_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `tbldocument`
+--
+
+INSERT INTO `tbldocument` (`tracking_id`, `name`, `description`, `date_time_sent`, `page_number`) VALUES
+(1, 'fff', '', 'October 20, 2012 6:08am', 0),
+(2, 'dadada', 'asdfsdkf', 'October 20, 2012 10:51am', 4),
+(3, 'thisfunctionforarded', '', 'October 21, 2012 5:28pm', 0),
+(4, 'ernestrutherfors', '', 'October 21, 2012 6:04pm', 0),
+(5, 'kapoynagcode!', '', 'October 22, 2012 2:12am', 0),
+(6, 'memorandum', 'sign this memo!', 'October 22, 2012 2:40am', 2),
+(7, 'Chupacabra', 'sample', 'October 22, 2012 2:42am', 5),
+(8, 'blahblah', '', 'October 22, 2012 3:04am', 4);
 
 -- --------------------------------------------------------
 
@@ -218,8 +235,41 @@ CREATE TABLE IF NOT EXISTS `tblsenders_receivers` (
   `dept_id` int(16) DEFAULT NULL,
   `verified` tinyint(4) NOT NULL,
   `date_time_received` varchar(50) DEFAULT NULL,
+  `forward_id` int(16) DEFAULT NULL,
+  `date_time_forwarded` varchar(50) DEFAULT NULL,
+  `forwarded` tinyint(4) NOT NULL,
   `display` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblsenders_receivers`
+--
+
+INSERT INTO `tblsenders_receivers` (`tracking_id`, `sender`, `receiver`, `dept_id`, `verified`, `date_time_received`, `forward_id`, `date_time_forwarded`, `forwarded`, `display`) VALUES
+(1, 7, 8, NULL, 1, 'October 20, 2012 6:09am', 10, 'October 21, 2012 8:08pm', 1, 0),
+(1, 7, 10, NULL, 1, 'October 20, 2012 6:10am', NULL, NULL, 0, 0),
+(1, 7, 17, NULL, 1, 'October 20, 2012 6:10am', NULL, NULL, 0, 0),
+(2, 7, 8, NULL, 1, 'October 20, 2012 10:51am', 12, 'October 21, 2012 8:08pm', 1, 0),
+(2, 7, 12, NULL, 1, 'October 20, 2012 10:55am', NULL, NULL, 0, 0),
+(2, 7, 9, NULL, 1, 'October 21, 2012 2:21pm', 8, 'October 21, 2012 3:32pm', 1, 0),
+(3, 7, 10, NULL, 1, 'October 21, 2012 5:32pm', NULL, NULL, 0, 0),
+(3, 7, 12, NULL, 1, 'October 21, 2012 5:28pm', 16, 'October 21, 2012 5:29pm', 1, 0),
+(3, 7, 16, NULL, 1, 'October 21, 2012 5:30pm', 10, 'October 21, 2012 5:30pm', 1, 0),
+(4, 7, 10, NULL, 1, 'October 21, 2012 6:05pm', 9, 'October 21, 2012 6:05pm', 1, 0),
+(4, 7, 9, NULL, 1, 'October 21, 2012 6:06pm', NULL, NULL, 0, 0),
+(4, 7, 12, NULL, 1, 'October 21, 2012 6:05pm', 9, 'October 21, 2012 6:06pm', 1, 0),
+(5, 7, 8, NULL, 1, 'October 22, 2012 2:13am', 17, 'October 22, 2012 2:14am', 1, 0),
+(5, 7, 12, NULL, 0, NULL, NULL, NULL, 0, 0),
+(5, 7, 17, NULL, 1, 'October 22, 2012 2:14am', 12, 'October 22, 2012 2:14am', 1, 0),
+(6, 7, 12, NULL, 1, 'October 22, 2012 2:50am', NULL, NULL, 0, 1),
+(6, 7, 21, NULL, 1, 'October 22, 2012 3:03am', 12, 'October 22, 2012 3:03am', 1, 1),
+(6, 7, 13, NULL, 0, NULL, NULL, NULL, 0, 1),
+(7, 7, NULL, 1, 0, NULL, NULL, NULL, 0, 1),
+(7, 7, NULL, 2, 0, NULL, NULL, NULL, 0, 1),
+(7, 7, NULL, 7, 0, NULL, NULL, NULL, 0, 1),
+(8, 7, 8, NULL, 1, 'October 22, 2012 3:05am', 10, 'October 22, 2012 3:09am', 1, 1),
+(8, 7, 10, NULL, 0, NULL, NULL, NULL, 0, 1),
+(8, 7, 11, NULL, 0, NULL, NULL, NULL, 0, 1);
 
 -- --------------------------------------------------------
 
