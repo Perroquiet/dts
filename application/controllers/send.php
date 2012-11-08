@@ -112,9 +112,13 @@ class Send extends CI_Controller {
 			} else {
 			
 			$this->send_model->insert_description_dept();
-			redirect('home');
-			
+			if (!empty($_FILES['userfile']['name']))
+			{
+				$this->send_model->do_upload();
 			}
+			redirect('home');
+			}
+			
 		}	
 		
 	}

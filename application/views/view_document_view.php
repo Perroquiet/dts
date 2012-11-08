@@ -191,7 +191,39 @@ $verified = false;
 					
 						}
 				}
+			$this->load->model('home_model');
 			echo "</tr>";
+			echo '</table><hr/><table>';
+			echo '<tr><td>';
+			echo '<div class="submitComment" id="insertbeforMe">';
+			echo '<h3>Add your comment</h3>';
+			echo form_open('home/add_comment/'.$this->uri->segment(3).'/'.$this->home_model->get_user_id());
+			echo '<p>';
+			echo form_textarea('comment', '', 'placeholder="Write comment here..."' );
+			echo '</p><br/>';
+			echo form_submit('submit', 'Comment');
+			echo form_close();
+			echo '</div>';
+			echo '<div><br/><br/>';
+			echo '<h3>Comments:</h3>';
+			echo '<br/>';
+			if (isset($comments)) {
+				
+				foreach ($comments as $comment) {
+				echo '<strong>'.$comment->first_name .' '. $comment->last_name . '</strong> ';
+				echo '<font size="1">'.$comment->date_time . '</font><br/>';
+				echo '&nbsp&nbsp'.$comment->message.'<br/>';
+				echo '<hr/>';
+				echo '</div>';
+				}
+			} else {
+				echo 'No comments.';
+			}
+			
+			echo '</div>';
+						
+			
+			echo '</td></tr>';
 			echo "</table>";
 		}
 	}

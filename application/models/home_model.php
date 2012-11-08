@@ -339,6 +339,15 @@ class Home_model extends CI_Model {
 		}
 	}
 	
+	public function get_user_full_name($user_id) {
+		$sql = "SELECT CONCAT(first_name, ' ', last_name) as name FROM tbldescription WHERE user_id = ".$user_id;
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return null;
+		}
+	}
 //Uploading
 	
 	function get_attachment($tracking_id) {
@@ -359,7 +368,32 @@ class Home_model extends CI_Model {
 		
 		return $data;
 	}
+
 	
+//Commenting
+
+	public function insert_comment($tracking_id, $user_id)
+        {
+                $commentArray = array(
+                  'tracking_id' 	=>	$tracking_id,
+                  'user_id'    		=>	$user_id,
+                  'message'  		=>	$this->input->post('comment'),
+				  'date_time'		=>	date('F d, Y g:ia', time())
+                    
+                );
+                $this->db->insert('tblcomment',$commentArray);
+        }
+		
+	public function get_comment_posts($tracking_id)
+	{
+		$sql = 'SELECT * FROM tbldescription, tblcomment WHERE tbldescription.user_id = tblcomment.user_id AND tblcomment.tracking_id ='.$tracking_id.' ORDER BY id DESC';
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return null;
+		}
+	}
 }
 
 ?>

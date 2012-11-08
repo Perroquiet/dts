@@ -8,6 +8,7 @@ class Login extends CI_Controller {
 		$this->data['page_title'] = 'Login';
 		$this->data['cs_scripts'] = array(base_url() . 'css/style.css');
 		$this->data['jquery_enabled'] = true;
+		$this->load->model('home_model');
 	}
 	
 	
@@ -43,6 +44,7 @@ class Login extends CI_Controller {
 				
 				$data = array (
 					'username' => $this->input->post('username'),
+					'id'		=> $this->home_model->get_user_id(),
 					'is_logged_in' => true
 				);
 

@@ -26,6 +26,35 @@ body{
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffe8', endColorstr='#d6dbbf',GradientType=0 ); /* IE6-9 */
 
 }
+textarea {
+	margin: 0;
+    padding: 3px 8px;
+	border: 1px solid #8496ba;
+	width: 384px;
+	height: 50px;
+	-moz-border-radius: 1px;
+	-webkit-border-radius: 1px;
+}
+
+input[type=submit] {
+	border: 1px solid #cc0000;
+	padding: 6px;
+	text-decoration: none;
+	font-size: 12px;
+	float: right;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background: #E04848;
+	color: #FFF;
+	-moz-box-shadow: 0 1px 0 white;
+	-webkit-box-shadow: 0 1px 0 white;	
+}
+
+input[type=submit]:hover {
+	background: #cc0000;
+	cursor: pointer;
+}
 
 .table1 {
 	padding-left: 40px;

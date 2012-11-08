@@ -16,6 +16,7 @@ private $user_id;
 									base_url() . 'js/home_script.js',
 									//base_url() . 'js/messages_script.js',
 									base_url() . 'js/jquery.toastmessage.js'
+									
 									);
 		$this->data['cs_scripts'] = array(
 									base_url() . 'css/home_style.css',
@@ -141,6 +142,8 @@ private $user_id;
 					}
 				}
 			}
+			$this->data['comments'] = $this->home_model->get_comment_posts($tracking_id);
+			
 			$this->data['sub_content'] = 'view_document_view';
 			$this->load->view('includes/template.php', $this->data);
 		}	
@@ -158,7 +161,7 @@ private $user_id;
 			if ($this->home_model->get_document_info($tracking_id)) {
 				$this->data['documentView'] = $this->home_model->get_document_info($tracking_id);
 			}
-			
+			$this->data['attachments'] = $this->home_model->get_attachment($tracking_id);
 			$freeze = $this->home_model->get_document_info($tracking_id);
 			
 			foreach ($freeze as $row) {
@@ -179,10 +182,19 @@ private $user_id;
 					}
 				}
 			}
+			$this->data['comments'] = $this->home_model->get_comment_posts($tracking_id);
+			
 			$this->data['sub_content'] = 'view_document_view';
 			$this->load->view('includes/template.php', $this->data);
 		}
 	}
+	
+	 function add_comment($tracking_id, $user_id)
+        {
+            $this->home_model->insert_comment($tracking_id, $user_id);
+			redirect('home/');
+			
+        }
 	
 	public function forwardToPerson($tracking_id) {
 		if (!$this->session->userdata('is_logged_in')) {
