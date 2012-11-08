@@ -1,0 +1,78 @@
+PVE
+#showtooltip steady shot
+/cast kill shot
+/cast [harm,nodead] steady shot
+/script UIErrorsFrame:Clear()
+
+Cheetah to Pack
+/cast Aspect of the Cheetah
+/cast Aspect of the Pack
+
+Disengage + Parachute
+/cast Wing Clip
+/cast Disengage
+/use 15
+
+Rouge/Feral opener
+/cleartarget
+/targetenemyplayer
+/startattack
+/petattack
+/cast Hunter's Mark
+/petassist
+
+Tranquilizing Shot
+#showtooltip Tranquilizing Shot
+/cast [@mouseover,harm][harm] Tranquilizing Shot
+
+BM Burst
+/cancelaura Deterrence
+/cancelaura Hand of Protection
+/petattack
+/use 14
+/cast Bestial Wrath
+/cast Rapid Fire
+/cast Kill Command
+/script UIErrorsFrame:Clear()
+
+Silencing Shot
+#showtooltip Silencing Shot
+/cast [@mouseover,harm][harm] Silencing Shot
+
+Healthstone/Potion Macro
+/use Healthstone
+/use Runic Healing Potion
+/script UIErrorsFrame:Clear()
+
+Pet Survival Macro
+/cast Cower
+/cast Last Stand
+/cast Bullheaded
+/cast Heart of the Phoenix
+/cast Mend Pet
+/script UIErrorsFrame:Clear()
+
+Camouflage Toggle Macro
+#showtooltip Camouflage
+/cancelaura Camouflage
+/cast Camouflage
+/script UIErrorsFrame:Clear()
+
+First aid macro
+/use [@mouseover,help][@player] Frostweave Bandage
+
+Scare Beast
+#showtooltip Scare Beast
+/cast [mod:shift][@focus] Scare Beast
+/cast [@mouseover,harm][harm] Scare Beast
+
+Kill shot macro
+#showtooltip Kill Shot
+/cancelaura Deterrence
+/cancelaura Hand of Protection
+/cast Kill Shot
+/script UIErrorsFrame:Clear()
+
+Scatter shot macro
+#showtooltip Scatter Shot
+/cast [@mouseover,harm][harm] Scatter Shot

@@ -2,7 +2,7 @@
 
 function con(msg1) {
  var answer = confirm(msg1);
- if (answer) alert("Are you sure you wish to continue to send document!");{
+ if (answer) {
  return true;
  }
  return false;
@@ -47,9 +47,9 @@ $page_nums = array(
 	
 	<?php 
 	if ($bywhat == 'Person') {
-	echo form_open('send/submit', $form_attrib);
+	echo form_open_multipart('send/submit', $form_attrib);
 	} else if ($bywhat == 'Department'){
-	echo form_open('send/submitdept', $form_attrib);
+	echo form_open_multipart('send/submitdept', $form_attrib);
 	}
 		
 	?>

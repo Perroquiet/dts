@@ -2,6 +2,9 @@
 
 class Send_model extends CI_Model {
 	
+	private $tracking_id;
+	private $upload_path;
+	
 	public function __construct() {
 		parent::__construct();
 		
@@ -13,21 +16,23 @@ class Send_model extends CI_Model {
 			'name' 				=> $this->input->post('documentName'),
 			'description' 		=> $this->input->post('documentDescription'),
 			'date_time_sent' 	=> date('F d, Y g:ia', time()),
-			'page_number'		=> $this->input->post('pageNum')
+			'page_number'		=> $this->input->post('pageNum'),
+			'upload_file_path'	=>	$this->input->post('userfile')
 		);
 		
 		$this->db->insert('tbldocument', $data);
 		
-		$tracking_id = mysql_insert_id();
-		
+		$this->tracking_id = mysql_insert_id();
 		$recipient = explode(",", $this->input->post('recipients'));
 		
 		$numberOfRecipients = count($recipient);
 		
+		$this->create_directory($this->tracking_id);
+		
 		for ($i=0; $i<$numberOfRecipients; $i++) {
 		
-			if (!$this->check_recipient_duplication($tracking_id, $this->home_model->get_user_id(), $recipient[$i])) {
-				$this->insert_sender_receiver($tracking_id, $this->home_model->get_user_id(), $recipient[$i]);
+			if (!$this->check_recipient_duplication($this->tracking_id, $this->home_model->get_user_id(), $recipient[$i])) {
+				$this->insert_sender_receiver($this->tracking_id, $this->home_model->get_user_id(), $recipient[$i]);
 			} else {
 				return null;
 			}
@@ -45,19 +50,21 @@ class Send_model extends CI_Model {
 		
 		$this->db->insert('tbldocument', $data);
 		
-		$tracking_id = mysql_insert_id();
+		$this->tracking_id = mysql_insert_id();
 		$recipient = explode(",", $this->input->post('recipients'));
 		$numberOfRecipients = count($recipient);
 		
 		for ($i=0; $i<$numberOfRecipients; $i++) {
 		
-			if (!$this->check_recipient_duplication($tracking_id, $this->home_model->get_user_id(), $recipient[$i])) {
-				$this->insert_sender_department($tracking_id, $this->home_model->get_user_id(), $recipient[$i]);
+			if (!$this->check_recipient_duplication($this->tracking_id, $this->home_model->get_user_id(), $recipient[$i])) {
+				$this->insert_sender_department($this->tracking_id, $this->home_model->get_user_id(), $recipient[$i]);
 			} else {
 				return null;
 			}
 			
 		}
+		
+		
 	}
 	
 	public function check_recipient_duplication($tracking_id, $user_id, $recipient) {
@@ -109,6 +116,35 @@ class Send_model extends CI_Model {
 		//$query = $this->db->get('tbldescription');
 		$query = $this->db->query($sql);
 		return $query->result();
+	}
+	
+	public function create_directory($dir)
+	{
+		$directories_path = 'C:/wamp/www/dts/application/public/files/';
+				
+		if (!is_dir($directories_path . $dir))
+		{
+			mkdir($directories_path . $dir); // modes are useless on windows
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	public function do_upload() {
+	
+		$this->create_directory($this->tracking_id);
+		$config = array(
+			'allowed_types'		=>	'jpg|jpeg|gif|doc|docx|png|xls|xlsx|txt',
+			'upload_path'		=>	realpath(APPPATH . 'public/files/' . $this->tracking_id),
+			'max_size' 			=>	2048
+		);
+		
+		$this->load->library('upload', $config);
+		$this->upload->do_upload();
+		//$file_data = $this->upload->data();
+		return true;
 	}
 }
 

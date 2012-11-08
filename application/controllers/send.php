@@ -78,15 +78,19 @@ class Send extends CI_Controller {
 			$this->form_validation->set_rules('documentName', 'Subject', 'trim|required');
 			$this->form_validation->set_rules('recipients', 'Receiver', 'required');		
 			$this->form_validation->set_rules('pageNum', '# of Pages', 'trim|integer');
-			
+						
 			if($this->form_validation->run() == FALSE)
 			{
 				$this->index();
 			} else {
 			
 			$this->send_model->insert_description();
-			redirect('home');
 			
+			if (!empty($_FILES['userfile']['name']))
+			{
+				$this->send_model->do_upload();
+			}
+			redirect('home');
 			}
 		}
 	}

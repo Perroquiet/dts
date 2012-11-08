@@ -44,6 +44,13 @@ $verified = false;
 				$verified = $row->verified;
 				break;
 			}
+			if (isset($attachments)) {
+				foreach ($attachments as $attachment) {
+					echo '<tr><td><strong>Attachment: </strong>';
+					echo '<a href="'.$attachment['url'].'">'.$attachment['file_name'].'</a>';
+					echo '</td></tr>';
+				}
+			}
 			echo "</table>";
 			echo "<hr/>";
 			

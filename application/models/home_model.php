@@ -340,7 +340,25 @@ class Home_model extends CI_Model {
 	}
 	
 //Uploading
-
+	
+	function get_attachment($tracking_id) {
+		
+		$path = realpath(APPPATH . 'public/files/' . $tracking_id);
+		$url = base_url(). 'application/public/files/';
+		$files = scandir($path);
+		$files = array_diff($files, array('.', '..', 'thumbs'));
+		
+		$data = array();
+		
+		foreach ($files as $file) {
+			$data []= array (
+				'url' => $url . $tracking_id . '/' . $file,
+				'file_name' => $file
+			);
+		}
+		
+		return $data;
+	}
 	
 }
 

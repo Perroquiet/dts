@@ -116,7 +116,7 @@ private $user_id;
 				$this->data['documentView'] = $this->home_model->get_document_info($tracking_id);
 				
 			}
-			
+			$this->data['attachments'] = $this->home_model->get_attachment($tracking_id);
 			$freeze = $this->home_model->get_document_info($tracking_id);
 			
 			foreach ($freeze as $row) {
