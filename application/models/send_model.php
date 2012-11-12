@@ -136,7 +136,7 @@ class Send_model extends CI_Model {
 	
 		$this->create_directory($this->tracking_id);
 		$config = array(
-			'allowed_types'		=>	'jpg|jpeg|gif|doc|docx|png|xls|xlsx|txt',
+			'allowed_types'		=>	'jpg|jpeg|gif|doc|docx|png|xls|xlsx|txt|pdf|bmp|gif',
 			'upload_path'		=>	realpath(APPPATH . 'public/files/' . $this->tracking_id),
 			'max_size' 			=>	2048
 		);

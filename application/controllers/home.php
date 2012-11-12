@@ -143,6 +143,7 @@ private $user_id;
 				}
 			}
 			$this->data['comments'] = $this->home_model->get_comment_posts($tracking_id);
+			$this->session->set_flashdata('previous_page', uri_string());
 			
 			$this->data['sub_content'] = 'view_document_view';
 			$this->load->view('includes/template.php', $this->data);
@@ -183,6 +184,7 @@ private $user_id;
 				}
 			}
 			$this->data['comments'] = $this->home_model->get_comment_posts($tracking_id);
+			$this->session->set_flashdata('previous_page', uri_string());
 			
 			$this->data['sub_content'] = 'view_document_view';
 			$this->load->view('includes/template.php', $this->data);
@@ -192,7 +194,7 @@ private $user_id;
 	 function add_comment($tracking_id, $user_id)
         {
             $this->home_model->insert_comment($tracking_id, $user_id);
-			redirect('home/');
+			redirect($this->session->flashdata('previous_page'));
 			
         }
 	
